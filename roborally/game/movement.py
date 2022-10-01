@@ -32,6 +32,8 @@ def get_turns(from_direction, to_direction):
 
 
 def get_to_direction(from_direction, turns):
+    if from_direction == None:
+        return None
     to_direction_int = (DIRECTIONS[from_direction] + turns) % 4
     result = None
     for (key, value) in DIRECTIONS.items():

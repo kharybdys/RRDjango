@@ -4,7 +4,6 @@ class Roborally {
     constructor(board_data, canvas_id) {
         this.board_data = board_data;
         this.element_size = this.board_data.factor * 12;
-        this.border_width = this.board_data.factor * 2;
         this.factor = this.board_data.factor;
         this.board_canvas = new fabric.StaticCanvas(canvas_id);
         this._load_canvas()
@@ -39,8 +38,8 @@ class Roborally {
         // noinspection JSSuspiciousNameCombination
         const element = new fabric.Rect({
           fill: 'darkslategrey',
-          width: this.element_size - 2 * this.border_width,
-          height:  this.element_size - 2 * this.border_width,
+          width: this.element_size - 4 * this.factor,
+          height:  this.element_size - 4 * this.factor,
           originX: 'center',
           originY: 'center'
         });
@@ -217,10 +216,10 @@ class Roborally {
             const side = new fabric.Rect({
               fill: color,
               left: 0,
-              top: this.element_size - this.border_width,
+              top: this.element_size - 2 * this.factor,
               strokeWidth: 0,
               width: this.element_size,
-              height: this.border_width
+              height: 2 * this.factor
             });
             conveyor_elements.push(side);
         }
@@ -230,7 +229,7 @@ class Roborally {
               left: 0,
               top: 0,
               strokeWidth: 0,
-              width: this.border_width,
+              width: 2 * this.factor,
               height: this.element_size
             });
             conveyor_elements.push(side);
@@ -243,17 +242,17 @@ class Roborally {
               top: 0,
               strokeWidth: 0,
               width: this.element_size,
-              height: this.border_width
+              height: 2 * this.factor
             });
             conveyor_elements.push(side);
         }
         if( ! data.starting_directions.includes('EAST') && 'EAST' !== end_direction) {
             const side = new fabric.Rect({
               fill: color,
-              left: this.element_size - this.border_width,
+              left: this.element_size - 2 * this.factor,
               top: 0,
               strokeWidth: 0,
-              width: this.border_width,
+              width: 2 * this.factor,
               height: this.element_size
             });
             conveyor_elements.push(side);
@@ -458,20 +457,53 @@ class Roborally {
     
     _draw_flag(data) {
         console.log('Drawing flag with data: ' + JSON.stringify(data))
-        const element = new fabric.Rect({
-          strokeWidth : this.board_data.border_width,
-          fill: this.base_element_color,
-          stroke: 'green',
-          width: this.element_size - 3 * this.border_width,
-          height:  this.element_size - 3 * this.border_width
-        });
-        const text = new fabric.Text(data.symbol, {
-            stroke: 'green'
-        });
+        let flag_color = 'lime'
+        let text_color = 'lime'
+        let flag_elements = []
+        flag_elements.push(new fabric.Line([data.x * this.element_size + 3 * this.factor,
+                data.y * this.element_size + 3 * this.factor,
+                data.x * this.element_size + 3 * this.factor,
+                data.y * this.element_size + 12 * this.factor],
+            { fill: flag_color,
+              stroke: flag_color,
+              strokeWidth: this.factor
+            }))
+        flag_elements.push(new fabric.Line([data.x * this.element_size + 3 * this.factor,
+                data.y * this.element_size + 3 * this.factor,
+                data.x * this.element_size + 10 * this.factor,
+                data.y * this.element_size + 3 * this.factor],
+            { fill: flag_color,
+              stroke: flag_color,
+              strokeWidth: this.factor
+            }))
+        flag_elements.push(new fabric.Line([data.x * this.element_size + 3 * this.factor,
+                data.y * this.element_size + 8 * this.factor,
+                data.x * this.element_size + 11 * this.factor,
+                data.y * this.element_size + 8 * this.factor],
+            { fill: flag_color,
+              stroke: flag_color,
+              strokeWidth: this.factor
+            }))
+        flag_elements.push(new fabric.Line([data.x * this.element_size + 10 * this.factor,
+                data.y * this.element_size + 3 * this.factor,
+                data.x * this.element_size + 10 * this.factor,
+                data.y * this.element_size + 9 * this.factor],
+            { fill: flag_color,
+              stroke: flag_color,
+              strokeWidth: this.factor
+            }))
 
-        const group = new fabric.Group([ element, text ], {
-          left: data.x * this.element_size + this.board_data.border_width,
-          top: data.y * this.element_size + this.board_data.border_width,
+        flag_elements.push(new fabric.Text(data.symbol, {
+            stroke: text_color,
+            fill: text_color,
+            textAlign: 'center',
+            fontSize: 4 * this.factor,
+            left: data.x * this.element_size + this.factor,
+            top: data.y * this.element_size + this.factor,
+            my_type: 'SYMBOL'
+        }));
+
+        const group = new fabric.Group(flag_elements, {
           my_type: 'FLAG'
         });
 
