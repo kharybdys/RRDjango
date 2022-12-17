@@ -1,17 +1,26 @@
-from roborally.game.basic import BasicElement
+from roborally.board.basic import Point
+from roborally.game.basic import BasicMovableElement, KEY_SYMBOL
+from roborally.models import Bot as BotModel
 
 
-class Bot(BasicElement):
+class Bot(BasicMovableElement):
     INITIAL_HEALTH = 10
 
-    def __init__(self, bot):
+    def __init__(self, bot: BotModel):
         super().__init__()
         self.model = bot
-        self.damage = 0
 
     def save(self):
         if self.model:
             self.model.save()
 
-    def paint(self):
-        pass
+    def to_data(self):
+        return {KEY_SYMBOL: str(self.model.order_number)}
+
+    @property
+    def coordinates(self):
+        return Point(self.model.x_coordinate, self.model.y_coordinate)
+
+    @property
+    def damage(self):
+        return self.model.damage

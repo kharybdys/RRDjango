@@ -1,22 +1,24 @@
-from roborally.board.element.basic import BasicElement, KEY_ELEMENT_TYPE
-from roborally.models import ElementTypes
+from abc import ABCMeta
+
+from roborally.board.element.basic import BasicElement
 from roborally.game import movement
+from roborally.models import Direction
 
 
-class Pusher(BasicElement):
+class Pusher(BasicElement, metaclass=ABCMeta):
 
-    def __init__(self, direction):
+    def __init__(self, direction: Direction):
         super().__init__()
         self.direction = direction
-        self.phases = []
-        self.type = None  # Not to be used so no type
+        self.phases: list[int] = []
 
-    def to_data(self):
-        return {KEY_ELEMENT_TYPE: self.type,
-                'direction': self.direction,
-                'symbol': ' '.join(map(str, self.phases))}
+    def to_data(self) -> dict:
+        element_data = super().to_data()
+        element_data[self.KEY_DIRECTION] = self.direction
+        element_data[self.KEY_SYMBOL] = ' '.join(map(str, self.phases))
+        return element_data
 
-    def board_movements(self, phase):
+    def board_movements(self, phase: int) -> list[movement.Movement]:
         if phase in self.phases:
             return [movement.Movement(direction=self.direction,
                                       steps=1,
@@ -28,14 +30,12 @@ class Pusher(BasicElement):
 
 
 class Pusher135(Pusher):
-    def __init__(self, direction):
+    def __init__(self, direction: Direction):
         super().__init__(direction)
         self.phases = [1, 3, 5]
-        self.type = ElementTypes.PUSHER_135
 
 
 class Pusher24(Pusher):
-    def __init__(self, direction):
+    def __init__(self, direction: Direction):
         super().__init__(direction)
         self.phases = [2, 4]
-        self.type = ElementTypes.PUSHER_24

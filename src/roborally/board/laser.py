@@ -1,6 +1,8 @@
+from roborally.models import Direction
+
 
 class LaserMixin:
-    def __init__(self, shooting_direction, hits=1):
+    def __init__(self, shooting_direction: Direction, hits: int = 1):
         self.shooting_direction = shooting_direction
         self.hits = hits
 

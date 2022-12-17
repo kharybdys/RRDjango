@@ -71,7 +71,7 @@ class ElementTypes(models.TextChoices):
     PUSHER_135 = 'PUSHER_135',
     PUSHER_24 = 'PUSHER_24',
     ROTATOR_CLOCKWISE = 'ROTATOR_CLOCKWISE',
-    ROTATOR_COUNTERCLOCKWISE = 'ROTATOR_COUNTERCLOCKWISE',
+    ROTATOR_COUNTER_CLOCKWISE = 'ROTATOR_COUNTER_CLOCKWISE',
     WALL = 'WALL',
     LASER = 'LASER'
 
@@ -196,7 +196,7 @@ class EventType(models.TextChoices):
     BOT_HITS_UNMOVABLE_BOT = 'BOT_HITS_UNMOVABLE_BOT'
 
 
-class Scenario(models.Model):
+class ScenarioBoard(models.Model):
     name = models.CharField(choices=ScenarioName.choices,
                             max_length=50)
     turns = models.IntegerField(default=0)

@@ -63,9 +63,9 @@ class Roborally {
         this.board_canvas.add(group);
     }
     
-    _draw_starting(data, number) {
+    _draw_starting(data) {
         console.log('Drawing starting with data: ' + JSON.stringify(data))
-        this._draw_with_symbol(data, String(number))
+        this._draw_with_symbol(data, String(data.symbol))
     }
     
     _draw_repair(data) {
@@ -605,60 +605,36 @@ class Roborally {
 
         this.board_data.elements.forEach((element) => {
             switch(element.element_type) {
-                case 'BASIC':
+                case 'BasicElement':
                     this._draw_basic(element);
                     break;
-                case 'STARTING_1':
-                    this._draw_starting(element, 1);
+                case 'StartingElement':
+                    this._draw_starting(element);
                     break;
-                case 'STARTING_2':
-                    this._draw_starting(element, 2);
-                    break;
-                case 'STARTING_3':
-                    this._draw_starting(element, 3);
-                    break;
-                case 'STARTING_4':
-                    this._draw_starting(element, 4);
-                    break;
-                case 'STARTING_5':
-                    this._draw_starting(element, 5);
-                    break;
-                case 'STARTING_6':
-                    this._draw_starting(element, 6);
-                    break;
-                case 'STARTING_7':
-                    this._draw_starting(element, 7);
-                    break;
-                case 'STARTING_8':
-                    this._draw_starting(element, 8);
-                    break;
-                case 'REPAIR':
+                case 'RepairElement':
                     this._draw_repair(element);
                     break;
-                case 'OPTION':
+                case 'OptionElement':
                     this._draw_option(element);
                     break;
-                case 'HOLE':
+                case 'HoleElement':
                     this._draw_hole(element);
                     break;
-                case 'SINGLE_CONVEYOR':
+                case 'SingleSpeedConveyor':
                     this._draw_single_conveyor(element);
                     break;
-                case 'DUAL_CONVEYOR':
+                case 'DualSpeedConveyor':
                     this._draw_dual_conveyor(element);
                     break;
-                case 'PUSHER_135':
-                case 'PUSHER_24':
+                case 'Pusher135':
+                case 'Pusher24':
                     this._draw_pusher(element);
                     break;
-                case 'ROTATOR_CLOCKWISE':
+                case 'ClockwiseRotator':
                     this._draw_rotator_clockwise(element);
                     break;
-                case 'ROTATOR_COUNTER_CLOCKWISE':
+                case 'CounterClockwiseRotator':
                     this._draw_rotator_counter_clockwise(element);
-                    break;
-                case 'VOID':
-                    // do nothing
                     break;
                 default:
                     console.error('Unsupported element_type ' + element.element_type);

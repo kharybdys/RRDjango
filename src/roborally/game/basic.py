@@ -1,13 +1,18 @@
+from abc import ABC, abstractmethod
+
 from roborally.board.element import basic
 
+KEY_SYMBOL = 'symbol'
 
-class BasicElement:
+
+class BasicMovableElement(ABC):
 
     def __init__(self):
-        self.location: basic.BasicElement = None
-        self.archive_marker: basic.BasicElement = None
+        self.location: basic.BasicElement
+        self.archive_marker: basic.BasicElement
         self.order_number: int = -1
         self.died_this_turn = False
 
-    def paint(self):
+    @abstractmethod
+    def to_data(self):
         pass

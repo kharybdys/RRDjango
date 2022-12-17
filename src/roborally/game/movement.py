@@ -1,3 +1,5 @@
+from typing import Optional
+
 from roborally.game import card
 from roborally.models import Direction
 
@@ -31,17 +33,18 @@ def get_turns(from_direction, to_direction):
     return DIRECTIONS[to_direction] - DIRECTIONS[from_direction]
 
 
-def get_to_direction(from_direction, turns):
-    if from_direction == None:
+def get_to_direction(from_direction: Optional[Direction], turns: int) -> Optional[Direction]:
+    if from_direction:
+        to_direction_int = (DIRECTIONS[from_direction] + turns) % 4
+        result = None
+        for (key, value) in DIRECTIONS.items():
+            if value == to_direction_int:
+                result = key
+        if result is None:
+            raise Exception(f'Trouble calculating to_direction based on {from_direction} and {turns}')
+        return result
+    else:
         return None
-    to_direction_int = (DIRECTIONS[from_direction] + turns) % 4
-    result = None
-    for (key, value) in DIRECTIONS.items():
-        if value == to_direction_int:
-            result = key
-    if result is None:
-        raise Exception(f'Trouble calculating to_direction based on {from_direction} and {turns}')
-    return result
 
 
 class Movement:
@@ -51,6 +54,7 @@ class Movement:
         self.steps, self.turns = MOVEMENT_CARD_TYPES[card.card_type(card_definition)]
         self.priority = card.priority(card_definition)
         self.type = TYPE_ROBOT
+        self.validate()
 
     def __init__(self, direction, steps, turns, priority, movement_type):
         self.direction = direction
@@ -58,3 +62,8 @@ class Movement:
         self.turns = turns
         self.priority = priority
         self.type = movement_type
+        self.validate()
+
+    def validate(self):
+        assert self.steps == 0 or self.steps == 1
+        assert self.steps == 0 or self.turns == 0
