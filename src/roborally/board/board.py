@@ -1,7 +1,8 @@
 from collections import defaultdict
 from django.forms import model_to_dict
 from roborally.models import BoardElement, Scenario, ScenarioFlag, ElementTypes, Direction
-from roborally.board.element import basic, conveyor, pusher, rotator
+from roborally.board.element import conveyor, pusher, rotator
+from roborally.board.element import basic
 from roborally.board.laser import Laser
 from roborally.game import movement
 from roborally.game.flag import Flag
