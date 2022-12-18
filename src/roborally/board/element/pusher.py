@@ -2,7 +2,7 @@ from abc import ABCMeta
 
 from roborally.board.element.basic import BasicElement
 from roborally.game import movement
-from roborally.models import Direction
+from roborally.game.direction import Direction
 
 
 class Pusher(BasicElement, metaclass=ABCMeta):
@@ -14,7 +14,7 @@ class Pusher(BasicElement, metaclass=ABCMeta):
 
     def to_data(self) -> dict:
         element_data = super().to_data()
-        element_data[self.KEY_DIRECTION] = self.direction
+        element_data[self.KEY_DIRECTION] = self.direction.value
         element_data[self.KEY_SYMBOL] = ' '.join(map(str, self.phases))
         return element_data
 

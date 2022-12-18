@@ -1,23 +1,8 @@
 from dataclasses import dataclass
-from enum import StrEnum, auto
 from typing import Self, ClassVar
 
-from roborally.models import Direction
+from roborally.game.direction import Direction
 from roborally.utils.codec import SerializationMixin
-
-
-class BoardElementTypes(StrEnum):
-    BASIC = auto()
-    STARTING = auto()
-    REPAIR = auto()
-    OPTION = auto()
-    HOLE = auto()
-    SINGLE_CONVEYOR = auto()
-    DUAL_CONVEYOR = auto()
-    PUSHER_135 = auto()
-    PUSHER_24 = auto()
-    ROTATOR_CLOCKWISE = auto()
-    ROTATOR_COUNTERCLOCKWISE = auto()
 
 
 @dataclass

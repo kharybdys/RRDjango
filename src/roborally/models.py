@@ -2,6 +2,9 @@ from django.contrib.auth.models import User
 from django.db import models
 from django.forms import ModelForm, ModelMultipleChoiceField
 
+from roborally.game.direction import Direction
+from roborally.game.card import CardDefinition
+
 
 class ScenarioName(models.TextChoices):
     MOVING_TARGETS = "MOVING_TARGETS",
@@ -89,100 +92,6 @@ class CardStatus(models.TextChoices):
     FLYWHEEL = 'FLYWHEEL'
 
 
-class Direction(models.TextChoices):
-    NORTH = 'NORTH'
-    EAST = 'EAST'
-    SOUTH = 'SOUTH'
-    WEST = 'WEST'
-
-
-class CardDefinition(models.TextChoices):
-    MC_10 = 'MC_10'
-    MC_20 = 'MC_20'
-    MC_30 = 'MC_30'
-    MC_40 = 'MC_40'
-    MC_50 = 'MC_50'
-    MC_60 = 'MC_60'
-    MC_70 = 'MC_70'
-    MC_80 = 'MC_80'
-    MC_90 = 'MC_90'
-    MC_100 = 'MC_100'
-    MC_110 = 'MC_110'
-    MC_120 = 'MC_120'
-    MC_130 = 'MC_130'
-    MC_140 = 'MC_140'
-    MC_150 = 'MC_150'
-    MC_160 = 'MC_160'
-    MC_170 = 'MC_170'
-    MC_180 = 'MC_180'
-    MC_190 = 'MC_190'
-    MC_200 = 'MC_200'
-    MC_210 = 'MC_210'
-    MC_220 = 'MC_220'
-    MC_230 = 'MC_230'
-    MC_240 = 'MC_240'
-    MC_250 = 'MC_250'
-    MC_260 = 'MC_260'
-    MC_270 = 'MC_270'
-    MC_280 = 'MC_280'
-    MC_290 = 'MC_290'
-    MC_300 = 'MC_300'
-    MC_310 = 'MC_310'
-    MC_320 = 'MC_320'
-    MC_330 = 'MC_330'
-    MC_340 = 'MC_340'
-    MC_350 = 'MC_350'
-    MC_360 = 'MC_360'
-    MC_370 = 'MC_370'
-    MC_380 = 'MC_380'
-    MC_390 = 'MC_390'
-    MC_400 = 'MC_400'
-    MC_410 = 'MC_410'
-    MC_420 = 'MC_420'
-    MC_430 = 'MC_430'
-    MC_440 = 'MC_440'
-    MC_450 = 'MC_450'
-    MC_460 = 'MC_460'
-    MC_470 = 'MC_470'
-    MC_480 = 'MC_480'
-    MC_490 = 'MC_490'
-    MC_500 = 'MC_500'
-    MC_510 = 'MC_510'
-    MC_520 = 'MC_520'
-    MC_530 = 'MC_530'
-    MC_540 = 'MC_540'
-    MC_550 = 'MC_550'
-    MC_560 = 'MC_560'
-    MC_570 = 'MC_570'
-    MC_580 = 'MC_580'
-    MC_590 = 'MC_590'
-    MC_600 = 'MC_600'
-    MC_610 = 'MC_610'
-    MC_620 = 'MC_620'
-    MC_630 = 'MC_630'
-    MC_640 = 'MC_640'
-    MC_650 = 'MC_650'
-    MC_660 = 'MC_660'
-    MC_670 = 'MC_670'
-    MC_680 = 'MC_680'
-    MC_690 = 'MC_690'
-    MC_700 = 'MC_700'
-    MC_710 = 'MC_710'
-    MC_720 = 'MC_720'
-    MC_730 = 'MC_730'
-    MC_740 = 'MC_740'
-    MC_750 = 'MC_750'
-    MC_760 = 'MC_760'
-    MC_770 = 'MC_770'
-    MC_780 = 'MC_780'
-    MC_790 = 'MC_790'
-    MC_800 = 'MC_800'
-    MC_810 = 'MC_810'
-    MC_820 = 'MC_820'
-    MC_830 = 'MC_830'
-    MC_840 = 'MC_840'
-
-
 class EventType(models.TextChoices):
     BOT_PUSHES = 'BOT_PUSHES'
     CONVEYORBELT_STALL = 'CONVEYORBELT_STALL'
@@ -221,10 +130,18 @@ class BoardElement(models.Model):
                                     max_length=50)
     x_coordinate = models.IntegerField(default=-1)
     y_coordinate = models.IntegerField(default=-1)
-    direction = models.CharField(choices=Direction.choices,
+    direction = models.CharField(choices=Direction.get_choices(),
                                  max_length=5,
                                  null=True,
                                  blank=True)
+
+    def to_dict(self):
+        return {'name': self.name,
+                'element_type': ElementTypes(self.element_type) if self.element_type else None,
+                'x_coordinate': self.x_coordinate,
+                'y_coordinate': self.y_coordinate,
+                'direction': Direction(self.direction) if self.direction else None
+                }
 
 
 class Binary(models.Model):
@@ -287,7 +204,7 @@ class Bot(models.Model):
                                         blank=True)
     user = models.OneToOneField(User, on_delete=models.CASCADE)  # TODO: Decide on cascade
     order_number = models.IntegerField(default=0)
-    facing_direction = models.CharField(choices=Direction.choices,
+    facing_direction = models.CharField(choices=Direction.get_choices(),
                                         max_length=5
                                         )
     created_by = models.CharField(max_length=250, default='internal')
@@ -340,7 +257,7 @@ class MovementCard(models.Model):
                               default='INITIAL'
                               )
     bot = models.ForeignKey(Bot, on_delete=models.CASCADE)  # TODO: Decide on cascade
-    card_definition = models.CharField(choices=CardDefinition.choices,
+    card_definition = models.CharField(choices=CardDefinition.get_choices(),
                                        max_length=32
                                        )
     optional_text = models.CharField(max_length=250)

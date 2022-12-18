@@ -1,12 +1,12 @@
 from collections import defaultdict
 
+import roborally.game.direction
 from roborally.board.basic import Point
-from roborally.board.element.basic import BasicElement
-from roborally.board.loader import BoardLoader
-from roborally.game.bot import Bot
-from roborally.models import ScenarioBoard as ScenarioModel, ScenarioFlag, Direction
 from roborally.board.element import basic
 from roborally.board.laser import Laser
+from roborally.board.loader import BoardLoader, ScenarioDataProvider
+from roborally.game.direction import Direction
+from roborally.game.bot import Bot
 from roborally.game import movement
 from roborally.game.flag import Flag
 from roborally.utils.codec import SerializationMixin
@@ -14,21 +14,21 @@ from roborally.utils.codec import SerializationMixin
 
 class Scenario(SerializationMixin):
 
-    def __init__(self, scenario_name, load_flags=False):
+    def __init__(self, scenario_data_provider: ScenarioDataProvider, load_flags: bool=False):
         self.y_size = 0
         self.x_size = 0
-        self.elements: dict[Point, BasicElement] = {}
+        self.elements: dict[Point, basic.BasicElement] = {}
         self.walls: dict[Point, set[Direction]] = defaultdict(set)
         self.lasers: dict[tuple[Point, Direction], Laser] = {}
         self.flags: dict[Point, Flag] = {}
         self.bots: dict[Point, Bot] = {}
-        boards = ScenarioModel.objects.filter(name=scenario_name)
-        for board in boards:
-            self._add_board(board)
+        for loader in scenario_data_provider.get_loader_for_boards():
+            self._add_board(loader)
 
         self._determine_size()
         if load_flags:
-            self._add_flags(scenario_name)
+            for flag in scenario_data_provider.flags:
+                self.add_flag(Flag(flag))
         self._fill_neighbours()
         self._validate()
 
@@ -49,13 +49,7 @@ class Scenario(SerializationMixin):
         y_range.extend([end.y] * (len(x_range) - len(y_range)))
         return [Point(d[0], d[1]) for d in zip(x_range, y_range)]
 
-    def _add_flags(self, scenario_name: str):
-        flags = ScenarioFlag.objects.filter(name=scenario_name)
-        for flag in flags:
-            self.add_flag(Flag(flag))
-
-    def _add_board(self, board: ScenarioModel):
-        loader = BoardLoader(board)
+    def _add_board(self, loader: BoardLoader):
         self.elements.update(loader.board_elements)
         self.walls.update(loader.walls)
         self.lasers.update(loader.lasers)
@@ -84,7 +78,7 @@ class Scenario(SerializationMixin):
             for y in range(0, self.y_size):
                 current_element = self.elements.get(Point(x, y))
                 if current_element:
-                    for direction in Direction.values:
+                    for direction in list(Direction):
                         neighbour = self.elements.get(Point(x, y).neighbour(direction), void)
                         current_element.set_neighbour(direction, neighbour)
                     current_element.neighbours_completed()
@@ -110,7 +104,7 @@ class Scenario(SerializationMixin):
 
         for coordinates, directions in self.walls.items():
             for direction in directions:
-                wall_data = {self.KEY_DIRECTION: direction}
+                wall_data = {self.KEY_DIRECTION: direction.value}
                 wall_data.update(coordinates.to_data())
                 board_data['walls'].append(wall_data)
 
@@ -139,7 +133,7 @@ class Scenario(SerializationMixin):
             return coordinates
         else:
             new_coordinates = coordinates.neighbour(direction)
-            if movement.get_to_direction(direction, 2) in self.walls[new_coordinates]:
+            if roborally.game.direction.get_to_direction(direction, 2) in self.walls[new_coordinates]:
                 return coordinates
             else:
                 return self.determine_laser_end(new_coordinates, direction, ignore_bots)

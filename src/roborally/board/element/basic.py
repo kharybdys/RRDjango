@@ -1,7 +1,7 @@
 from typing import Self
 
+from roborally.game.direction import Direction
 from roborally.game.movement import Movement
-from roborally.models import Direction
 from roborally.utils.codec import SerializationMixin
 
 # parameters for drawing a board on the web

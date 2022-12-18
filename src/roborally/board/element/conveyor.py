@@ -1,8 +1,9 @@
 from abc import ABCMeta
 
+import roborally.game.direction
 from roborally.board.element.basic import BasicElement
 from roborally.game import movement
-from roborally.models import Direction
+from roborally.game.direction import Direction
 
 
 class Conveyor(BasicElement, metaclass=ABCMeta):
@@ -16,17 +17,17 @@ class Conveyor(BasicElement, metaclass=ABCMeta):
         super().set_neighbour(direction, element)
         if self.end_direction != direction and isinstance(element, self.__class__):
             neighbour_end_direction = element.end_direction
-            if movement.get_to_direction(direction, 2) == neighbour_end_direction:
+            if roborally.game.direction.get_to_direction(direction, 2) == neighbour_end_direction:
                 self.starting_directions.append(direction)
 
     def neighbours_completed(self):
         if not self.starting_directions:
-            self.starting_directions.append(movement.get_to_direction(self.end_direction, 2))
+            self.starting_directions.append(roborally.game.direction.get_to_direction(self.end_direction, 2))
 
     def to_data(self) -> dict:
         element_data = super().to_data()
-        element_data['starting_directions'] = self.starting_directions
-        element_data['end_direction'] = self.end_direction
+        element_data['starting_directions'] = [direction.value for direction in self.starting_directions]
+        element_data['end_direction'] = self.end_direction.value
         return element_data
 
     def board_movements(self, phase: int) -> list[movement.Movement]:
@@ -50,7 +51,7 @@ class Conveyor(BasicElement, metaclass=ABCMeta):
             if neighbour.end_direction != self.end_direction:
                 turn = movement.Movement(direction=None,
                                          steps=0,
-                                         turns=movement.get_turns(self.end_direction, neighbour.end_direction),
+                                         turns=roborally.game.direction.get_turns(self.end_direction, neighbour.end_direction),
                                          priority=100,
                                          movement_type=movement.TYPE_SINGLE_CONVEYOR)
                 return [move, turn]

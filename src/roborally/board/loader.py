@@ -2,12 +2,22 @@ from collections import defaultdict
 
 from django.forms import model_to_dict
 
+import roborally.game.direction
 from roborally.board.basic import Point
 from roborally.board.element import conveyor, pusher, rotator, basic
 from roborally.board.element.basic import BasicElement
 from roborally.board.laser import Laser
-from roborally.game import movement
-from roborally.models import ScenarioBoard, BoardElement, ElementTypes, Direction
+from roborally.game.direction import Direction
+from roborally.models import ScenarioBoard, BoardElement, ElementTypes, ScenarioFlag
+
+
+class ScenarioDataProvider:
+    def __init__(self, scenario_name: str):
+        self.flags = ScenarioFlag.objects.filter(name=scenario_name)
+        self.boards = ScenarioBoard.objects.filter(name=scenario_name)
+
+    def get_loader_for_boards(self):
+        return [BoardLoader(board) for board in self.boards]
 
 
 class BoardLoader:
@@ -76,9 +86,9 @@ class BoardLoader:
 
         trans_func = self.transform.transform_function(max_x, max_y)
         elements = map(trans_func,
-                       map(model_to_dict, board.exclude(element_type__in=[ElementTypes.WALL, ElementTypes.LASER])))
-        walls = map(trans_func, map(model_to_dict, board.filter(element_type=ElementTypes.WALL)))
-        lasers = map(trans_func, map(model_to_dict, board.filter(element_type=ElementTypes.LASER)))
+                       map(BoardElement.to_dict, board.exclude(element_type__in=[ElementTypes.WALL, ElementTypes.LASER])))
+        walls = map(trans_func, map(BoardElement.to_dict, board.filter(element_type=ElementTypes.WALL)))
+        lasers = map(trans_func, map(BoardElement.to_dict, board.filter(element_type=ElementTypes.LASER)))
 
         for element in elements:
             self.board_elements[Point(element['x_coordinate'], element['y_coordinate'])] = self._create_element(element_type=element['element_type'], direction=element['direction'])
@@ -97,8 +107,8 @@ class BoardLoader:
             else:
                 self.lasers[laser_key] = Laser(Direction(laser['direction']))
 
-        top_left = trans_func({'x_coordinate': 0, 'y_coordinate': 0, 'direction': 'NORTH'})
-        bottom_right = trans_func({'x_coordinate': max_x, 'y_coordinate': max_y, 'direction': 'NORTH'})
+        top_left = trans_func({'x_coordinate': 0, 'y_coordinate': 0, 'direction': Direction.NORTH})
+        bottom_right = trans_func({'x_coordinate': max_x, 'y_coordinate': max_y, 'direction': Direction.NORTH})
 
         for x in range(min(top_left['x_coordinate'], bottom_right['x_coordinate']),
                        max(top_left['x_coordinate'], bottom_right['x_coordinate']) + 1):
@@ -143,6 +153,6 @@ class Transform:
             result['y_coordinate'] = new_coordinates.y
             result['x_coordinate'] += self.x_offset
             result['y_coordinate'] += self.y_offset
-            result['direction'] = movement.get_to_direction(result['direction'], self.turns)
+            result['direction'] = roborally.game.direction.get_to_direction(result['direction'], self.turns)
             return result
         return transform

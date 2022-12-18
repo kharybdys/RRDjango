@@ -1,4 +1,4 @@
-from roborally.models import CardDefinition
+from enum import Enum
 
 TYPE_U_TURN = 'U_TURN'
 TYPE_ROTATE_LEFT = 'ROTATE_LEFT'
@@ -11,7 +11,99 @@ TYPE_MOVE3 = 'MOVE3'
 FIELD_CARD_TYPE = 'CARD_TYPE'
 FIELD_PRIORITY = 'PRIORITY'
 
-cards = {CardDefinition.MC_10: {FIELD_PRIORITY: 10, FIELD_CARD_TYPE: TYPE_U_TURN},
+
+class CardDefinition(Enum):
+    MC_10 = 'MC_10'
+    MC_20 = 'MC_20'
+    MC_30 = 'MC_30'
+    MC_40 = 'MC_40'
+    MC_50 = 'MC_50'
+    MC_60 = 'MC_60'
+    MC_70 = 'MC_70'
+    MC_80 = 'MC_80'
+    MC_90 = 'MC_90'
+    MC_100 = 'MC_100'
+    MC_110 = 'MC_110'
+    MC_120 = 'MC_120'
+    MC_130 = 'MC_130'
+    MC_140 = 'MC_140'
+    MC_150 = 'MC_150'
+    MC_160 = 'MC_160'
+    MC_170 = 'MC_170'
+    MC_180 = 'MC_180'
+    MC_190 = 'MC_190'
+    MC_200 = 'MC_200'
+    MC_210 = 'MC_210'
+    MC_220 = 'MC_220'
+    MC_230 = 'MC_230'
+    MC_240 = 'MC_240'
+    MC_250 = 'MC_250'
+    MC_260 = 'MC_260'
+    MC_270 = 'MC_270'
+    MC_280 = 'MC_280'
+    MC_290 = 'MC_290'
+    MC_300 = 'MC_300'
+    MC_310 = 'MC_310'
+    MC_320 = 'MC_320'
+    MC_330 = 'MC_330'
+    MC_340 = 'MC_340'
+    MC_350 = 'MC_350'
+    MC_360 = 'MC_360'
+    MC_370 = 'MC_370'
+    MC_380 = 'MC_380'
+    MC_390 = 'MC_390'
+    MC_400 = 'MC_400'
+    MC_410 = 'MC_410'
+    MC_420 = 'MC_420'
+    MC_430 = 'MC_430'
+    MC_440 = 'MC_440'
+    MC_450 = 'MC_450'
+    MC_460 = 'MC_460'
+    MC_470 = 'MC_470'
+    MC_480 = 'MC_480'
+    MC_490 = 'MC_490'
+    MC_500 = 'MC_500'
+    MC_510 = 'MC_510'
+    MC_520 = 'MC_520'
+    MC_530 = 'MC_530'
+    MC_540 = 'MC_540'
+    MC_550 = 'MC_550'
+    MC_560 = 'MC_560'
+    MC_570 = 'MC_570'
+    MC_580 = 'MC_580'
+    MC_590 = 'MC_590'
+    MC_600 = 'MC_600'
+    MC_610 = 'MC_610'
+    MC_620 = 'MC_620'
+    MC_630 = 'MC_630'
+    MC_640 = 'MC_640'
+    MC_650 = 'MC_650'
+    MC_660 = 'MC_660'
+    MC_670 = 'MC_670'
+    MC_680 = 'MC_680'
+    MC_690 = 'MC_690'
+    MC_700 = 'MC_700'
+    MC_710 = 'MC_710'
+    MC_720 = 'MC_720'
+    MC_730 = 'MC_730'
+    MC_740 = 'MC_740'
+    MC_750 = 'MC_750'
+    MC_760 = 'MC_760'
+    MC_770 = 'MC_770'
+    MC_780 = 'MC_780'
+    MC_790 = 'MC_790'
+    MC_800 = 'MC_800'
+    MC_810 = 'MC_810'
+    MC_820 = 'MC_820'
+    MC_830 = 'MC_830'
+    MC_840 = 'MC_840'
+
+    @classmethod
+    def get_choices(cls):
+        return [(key.value, key.name) for key in cls]
+
+
+CARDS = {CardDefinition.MC_10: {FIELD_PRIORITY: 10, FIELD_CARD_TYPE: TYPE_U_TURN},
          CardDefinition.MC_20: {FIELD_PRIORITY: 20, FIELD_CARD_TYPE: TYPE_U_TURN},
          CardDefinition.MC_30: {FIELD_PRIORITY: 30, FIELD_CARD_TYPE: TYPE_U_TURN},
          CardDefinition.MC_40: {FIELD_PRIORITY: 40, FIELD_CARD_TYPE: TYPE_U_TURN},
@@ -99,8 +191,8 @@ cards = {CardDefinition.MC_10: {FIELD_PRIORITY: 10, FIELD_CARD_TYPE: TYPE_U_TURN
 
 
 def card_type(card_definition):
-    return cards[card_definition][FIELD_CARD_TYPE]
+    return CARDS[card_definition][FIELD_CARD_TYPE]
 
 
 def priority(card_definition):
-    return cards[card_definition][FIELD_PRIORITY]
+    return CARDS[card_definition][FIELD_PRIORITY]
