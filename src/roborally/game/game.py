@@ -1,3 +1,4 @@
+from roborally.board.loader import ScenarioDataProvider
 from roborally.board.scenario import Scenario
 from roborally.game.bot import Bot
 from roborally.game.flag import Flag
@@ -7,7 +8,8 @@ from roborally.models import Game as GameModel
 class Game:
     def __init__(self, game_id: int):
         self.model = GameModel.objects.get(pk=game_id)
-        self.scenario = Scenario(scenario_name=self.model.scenario_name, load_flags=False)
+        scenario_data_provider = ScenarioDataProvider(self.model.scenario_name)
+        self.scenario = Scenario(scenario_data_provider=scenario_data_provider, load_flags=False)
         self._load_flags()
         self._load_bots()
 

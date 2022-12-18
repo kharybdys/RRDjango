@@ -7,14 +7,13 @@ from roborally.board.laser import Laser
 from roborally.board.loader import BoardLoader, ScenarioDataProvider
 from roborally.game.direction import Direction
 from roborally.game.bot import Bot
-from roborally.game import movement
 from roborally.game.flag import Flag
 from roborally.utils.codec import SerializationMixin
 
 
 class Scenario(SerializationMixin):
 
-    def __init__(self, scenario_data_provider: ScenarioDataProvider, load_flags: bool=False):
+    def __init__(self, scenario_data_provider: ScenarioDataProvider, load_flags: bool = False):
         self.y_size = 0
         self.x_size = 0
         self.elements: dict[Point, basic.BasicElement] = {}

@@ -1,7 +1,5 @@
 from collections import defaultdict
 
-from django.forms import model_to_dict
-
 import roborally.game.direction
 from roborally.board.basic import Point
 from roborally.board.element import conveyor, pusher, rotator, basic

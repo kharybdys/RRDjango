@@ -51,7 +51,7 @@ class Conveyor(BasicElement, metaclass=ABCMeta):
             if neighbour.end_direction != self.end_direction:
                 turn = movement.Movement(direction=None,
                                          steps=0,
-                                         turns=roborally.game.direction.get_turns(self.end_direction, neighbour.end_direction),
+                                         turns=self.end_direction.turns_to(neighbour.end_direction),
                                          priority=100,
                                          movement_type=movement.TYPE_SINGLE_CONVEYOR)
                 return [move, turn]

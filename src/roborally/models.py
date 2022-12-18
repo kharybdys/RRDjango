@@ -213,7 +213,7 @@ class Bot(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.order_number}@{self.game.name}[{self.id}] for {self.user.name}'
+        return f'{self.order_number}@{self.game.name}[{self.id}] for {self.user.username}'
 
 
 class History(models.Model):
@@ -267,5 +267,5 @@ class MovementCard(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f'{self.card_definition}@{self.game.name}/{self.phase}/{self.round}[{self.id}]' \
+        return f'{self.card_definition}@{self.bot.game.name}/{self.phase}/{self.round}[{self.id}]' \
                f' for {self.bot.order_number}'
