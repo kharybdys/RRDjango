@@ -2,6 +2,7 @@ from abc import ABCMeta
 
 from roborally.board.element.basic import BasicElement
 from roborally.game import movement
+from roborally.game.basic import BasicMovableElement
 from roborally.game.direction import Direction
 
 
@@ -18,13 +19,14 @@ class Pusher(BasicElement, metaclass=ABCMeta):
         element_data[self.KEY_SYMBOL] = ' '.join(map(str, self.phases))
         return element_data
 
-    def board_movements(self, phase: int) -> list[movement.Movement]:
+    def board_movements(self, phase: int, movable: BasicMovableElement) -> list[movement.Movement]:
         if phase in self.phases:
             return [movement.Movement(direction=self.direction,
                                       steps=1,
                                       turns=0,
                                       priority=0,
-                                      movement_type=movement.TYPE_PUSHER)]
+                                      movement_type=movement.TYPE_PUSHER,
+                                      moved_object=movable)]
         else:
             return []
 

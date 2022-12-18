@@ -1,8 +1,7 @@
 from roborally.board.basic import Point
-from roborally.game.basic import BasicMovableElement, KEY_SYMBOL
+from roborally.game.basic import BasicMovableElement
+from roborally.game.direction import Direction
 from roborally.models import ScenarioFlag
-
-TYPE_FLAG = 'FLAG'
 
 
 class Flag(BasicMovableElement):
@@ -12,12 +11,19 @@ class Flag(BasicMovableElement):
         self.model = flag
 
     def save(self):
-        if self.model:
-            self.model.save()
+        self.model.save()
 
     def to_data(self):
-        return {KEY_SYMBOL: str(self.model.order_number)}
+        return {self.KEY_SYMBOL: str(self.model.order_number)}
 
     @property
     def coordinates(self):
         return Point(self.model.x_coordinate, self.model.y_coordinate)
+
+    def update_coordinates_and_direction(self, new_coordinates: Point, new_direction: Direction):
+        self.model.x_coordinate = new_coordinates.x
+        self.model.y_coordinate = new_coordinates.y
+
+    @property
+    def order_number(self):
+        return self.model.order_number

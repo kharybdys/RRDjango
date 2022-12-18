@@ -5,9 +5,12 @@ from roborally.board.basic import Point
 from roborally.board.element import basic
 from roborally.board.laser import Laser
 from roborally.board.loader import BoardLoader, ScenarioDataProvider
+from roborally.game.basic import BasicMovableElement
 from roborally.game.direction import Direction
 from roborally.game.bot import Bot
+from roborally.game.events import WallCollisionEvent, BotCollisionEvent, MovableElementKilledEvent
 from roborally.game.flag import Flag
+from roborally.game.movement import Movement
 from roborally.utils.codec import SerializationMixin
 
 
@@ -136,3 +139,47 @@ class Scenario(SerializationMixin):
                 return coordinates
             else:
                 return self.determine_laser_end(new_coordinates, direction, ignore_bots)
+
+    def update_movable_coordinates_and_direction(self, movable: BasicMovableElement, new_coordinates: Point, new_direction: Direction):
+        match movable.__class__:
+            case Bot():
+                movables = self.bots
+            case Flag():
+                movables = self.flags
+            case _:
+                raise ValueError(f"Updating movable of type {movable.__class__} not supported")
+        self._update_movable_coordinates_and_direction(movable, new_coordinates, new_direction, movables)
+
+    @staticmethod
+    def _update_movable_coordinates_and_direction(movable: BasicMovableElement, new_coordinates: Point, new_direction: Direction, movables: dict[Point, BasicMovableElement]):
+        # movable should be found in the scenario at the current movable coordinates, remove it from there.
+        if movables[movable.coordinates] == movable:
+            del movables[movable.coordinates]
+            movable.update_coordinates_and_direction(new_coordinates, new_direction)
+            movables[new_coordinates] = movable
+        else:
+            raise Exception(f"Movable {movable.order_number} not found on expected coordinates: {movable.coordinates}")
+
+    def all_board_movements(self, phase: int) -> list[Movement]:
+        result = []
+        for (coordinates, flag) in self.flags.items():
+            result.extend(self.elements[coordinates].board_movements(phase, flag))
+        for (coordinates, bot) in self.bots.items():
+            result.extend(self.elements[coordinates].board_movements(phase, bot))
+        return result
+
+    def process_movement(self, movement: Movement):
+        current_coordinates = movement.moved_object.coordinates
+        if movement.direction in self.walls[current_coordinates]:
+            raise WallCollisionEvent
+        new_coordinates = current_coordinates
+        for _ in range(0, movement.steps):
+            new_coordinates = new_coordinates.neighbour(movement.direction)
+        if new_coordinates in self.bots.keys():
+            # TODO: This is too simplistic, pushing (if movement_type is robot) is missing
+            raise BotCollisionEvent
+        if self.elements[current_coordinates].get_neighbour(movement.direction).KILLS:
+            # TODO: Handle movable being killed
+            raise MovableElementKilledEvent
+        new_direction = movement.moved_object.facing_direction.turn(movement.turns)
+        self.update_movable_coordinates_and_direction(movement.moved_object, new_coordinates, new_direction)

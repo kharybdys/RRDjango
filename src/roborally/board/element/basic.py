@@ -1,5 +1,6 @@
 from typing import Self
 
+from roborally.game.basic import BasicMovableElement
 from roborally.game.direction import Direction
 from roborally.game.movement import Movement
 from roborally.utils.codec import SerializationMixin
@@ -10,6 +11,7 @@ DRAW_MAGNIFICATION_FACTOR = 6
 
 class BasicElement(SerializationMixin):
     KEY_ELEMENT_TYPE = 'element_type'
+    KILLS = False
 
     def __init__(self):
         self.neighbours = {}
@@ -19,7 +21,7 @@ class BasicElement(SerializationMixin):
         return {self.KEY_ELEMENT_TYPE: self.__class__.__name__}
 
     # to be overridden, but a basic element simply does nothing
-    def board_movements(self, phase: int) -> list[Movement]:
+    def board_movements(self, phase: int, movable: BasicMovableElement) -> list[Movement]:
         return []
 
     def get_neighbour(self, direction: Direction) -> Self:
@@ -59,9 +61,11 @@ class OptionElement(BasicElement):
 
 
 class HoleElement(BasicElement):
-    pass
+    KILLS = True
 
 
 class VoidElement(BasicElement):
+    KILLS = True
+
     def to_data(self):
         raise Exception("Void elements cannot be serialized")

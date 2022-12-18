@@ -1,18 +1,32 @@
 from abc import ABC, abstractmethod
 
-from roborally.board.element import basic
+from roborally.board.basic import Point
+from roborally.game.direction import Direction
+from roborally.utils.codec import SerializationMixin
 
-KEY_SYMBOL = 'symbol'
 
-
-class BasicMovableElement(ABC):
-
+class BasicMovableElement(ABC, SerializationMixin):
     def __init__(self):
-        self.location: basic.BasicElement
-        self.archive_marker: basic.BasicElement
-        self.order_number: int = -1
         self.died_this_turn = False
 
     @abstractmethod
-    def to_data(self):
+    def to_data(self) -> dict:
+        pass
+
+    @property
+    @abstractmethod
+    def coordinates(self) -> Point:
+        pass
+
+    @property
+    def facing_direction(self) -> Direction:
+        return Direction.NORTH
+
+    @property
+    @abstractmethod
+    def order_number(self) -> int:
+        pass
+
+    @abstractmethod
+    def update_coordinates_and_direction(self, new_coordinates: Point, new_direction: Direction):
         pass
