@@ -9,22 +9,39 @@ from roborally.game.direction import Direction
 from roborally.models import ScenarioBoard, BoardElement, ElementTypes, ScenarioFlag
 
 
+class BoardDataProvider:
+    def __init__(self, board_name: str):
+        board = BoardElement.objects.filter(name=board_name)
+
+        self.max_x = 0
+        self.max_y = 0
+
+        for board_element in board:
+            self.max_x = max(self.max_x, board_element.x_coordinate)
+            self.max_y = max(self.max_y, board_element.y_coordinate)
+
+        self.elements = map(BoardElement.to_dict,
+                            board.exclude(element_type__in=[ElementTypes.WALL, ElementTypes.LASER]))
+        self.walls = map(BoardElement.to_dict, board.filter(element_type=ElementTypes.WALL))
+        self.lasers = map(BoardElement.to_dict, board.filter(element_type=ElementTypes.LASER))
+
+
 class ScenarioDataProvider:
     def __init__(self, scenario_name: str):
         self.flags = ScenarioFlag.objects.filter(name=scenario_name)
         self.boards = ScenarioBoard.objects.filter(name=scenario_name)
 
     def get_loader_for_boards(self):
-        return [BoardLoader(board) for board in self.boards]
+        return [BoardLoader(board.turns, board.offset_x, board.offset_y, BoardDataProvider(board.board_name)) for board in self.boards]
 
 
 class BoardLoader:
-    def __init__(self, scenario_board: ScenarioBoard):
-        self.transform = Transform(scenario_board.turns, scenario_board.offset_x, scenario_board.offset_y)
+    def __init__(self, turns: int, offset_x: int, offset_y: int, board_data_provider: BoardDataProvider):
+        self.transform = Transform(turns, offset_x, offset_y)
         self.board_elements = {}
         self.walls = defaultdict(set)
         self.lasers = {}
-        self._load_board(scenario_board.board_name)
+        self._load_board(board_data_provider)
 
     @staticmethod
     def _create_element(element_type: ElementTypes, direction: Direction = None) -> BasicElement:
@@ -72,21 +89,12 @@ class BoardLoader:
             case _:
                 raise Exception(f"{element_type} is unsupported as BoardElement")
 
-    def _load_board(self, board_name: str) -> None:
-        board = BoardElement.objects.filter(name=board_name)
+    def _load_board(self, board_data_provider: BoardDataProvider) -> None:
 
-        max_x = 0
-        max_y = 0
-
-        for board_element in board:
-            max_x = max(max_x, board_element.x_coordinate)
-            max_y = max(max_y, board_element.y_coordinate)
-
-        trans_func = self.transform.transform_function(max_x, max_y)
-        elements = map(trans_func,
-                       map(BoardElement.to_dict, board.exclude(element_type__in=[ElementTypes.WALL, ElementTypes.LASER])))
-        walls = map(trans_func, map(BoardElement.to_dict, board.filter(element_type=ElementTypes.WALL)))
-        lasers = map(trans_func, map(BoardElement.to_dict, board.filter(element_type=ElementTypes.LASER)))
+        trans_func = self.transform.transform_function(board_data_provider.max_x, board_data_provider.max_y)
+        elements = map(trans_func, board_data_provider.elements)
+        walls = map(trans_func, board_data_provider.walls)
+        lasers = map(trans_func, board_data_provider.lasers)
 
         for element in elements:
             self.board_elements[Point(element['x_coordinate'], element['y_coordinate'])] = self._create_element(element_type=element['element_type'], direction=element['direction'])
@@ -106,7 +114,7 @@ class BoardLoader:
                 self.lasers[laser_key] = Laser(Direction(laser['direction']))
 
         top_left = trans_func({'x_coordinate': 0, 'y_coordinate': 0, 'direction': Direction.NORTH})
-        bottom_right = trans_func({'x_coordinate': max_x, 'y_coordinate': max_y, 'direction': Direction.NORTH})
+        bottom_right = trans_func({'x_coordinate': board_data_provider.max_x, 'y_coordinate': board_data_provider.max_y, 'direction': Direction.NORTH})
 
         for x in range(min(top_left['x_coordinate'], bottom_right['x_coordinate']),
                        max(top_left['x_coordinate'], bottom_right['x_coordinate']) + 1):
