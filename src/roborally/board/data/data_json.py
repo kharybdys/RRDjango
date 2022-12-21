@@ -1,6 +1,5 @@
 import json
 from dataclasses import asdict, dataclass, field
-from importlib.resources import files
 from typing import Optional
 
 from roborally.board.data.data_db import BoardDataProvider, ScenarioDataProvider
@@ -48,11 +47,10 @@ class JSONBoardDataProvider(BoardDataProvider):
 
 
 class JSONScenarioDataProvider(ScenarioDataProvider):
-    def __init__(self, resource_path: str):
-        with files(__package__).joinpath(resource_path).open('r') as f:
-            resource_dict = json.load(fp=f)
-            self.flags = [ScenarioFlagData(**flag) for flag in resource_dict["flags"]]
-            self.boards = [ScenarioBoardData(**board) for board in resource_dict["boards"]]
+    def __init__(self, scenario_data: str):
+        resource_dict = json.loads(s=scenario_data)
+        self.flags = [ScenarioFlagData(**flag) for flag in resource_dict["flags"]]
+        self.boards = [ScenarioBoardData(**board) for board in resource_dict["boards"]]
 
     def get_loader_for_boards(self):
         return [BoardLoader(board.turns, board.offset_x, board.offset_y, JSONBoardDataProvider(board.board_data)) for board in self.boards]

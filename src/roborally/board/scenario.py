@@ -41,6 +41,14 @@ class Scenario(SerializationMixin):
     def add_bot(self, bot: Bot):
         self.bots[bot.coordinates] = bot
 
+    def add_movable(self, movable: BasicMovableElement):
+        if isinstance(movable, Bot):
+            self.add_bot(movable)
+        elif isinstance(movable, Flag):
+            self.add_flag(movable)
+        else:
+            raise ValueError(f"Unsupported type of movable: {movable}")
+
     @staticmethod
     def _generate_laser_path(start: Point, end: Point) -> list[Point]:
         """ Generates a list of coordinates going from (start_x, start_y) to (end_x, end_y), inclusive.
