@@ -4,8 +4,7 @@ import roborally.game.direction
 from roborally.board.basic import Point
 from roborally.board.element import basic
 from roborally.board.laser import Laser
-from roborally.board.data.loader import BoardLoader
-from roborally.board.data.data_db import ScenarioDataProvider
+from roborally.board.data.loader import BoardLoader, ScenarioDataProvider
 from roborally.game.basic import BasicMovableElement
 from roborally.game.direction import Direction
 from roborally.game.bot import Bot

@@ -2,8 +2,7 @@ import json
 from dataclasses import asdict, dataclass, field
 from typing import Optional
 
-from roborally.board.data.data_db import BoardDataProvider, ScenarioDataProvider
-from roborally.board.data.loader import BoardLoader
+from roborally.board.data.loader import BoardLoader, BoardDataProvider, ScenarioDataProvider
 from roborally.game.direction import Direction
 from roborally.models import ElementTypes
 
