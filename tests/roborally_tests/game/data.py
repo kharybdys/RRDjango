@@ -15,7 +15,8 @@ def to_movable(movable_element_dict: dict) -> BasicMovableElement:
         return movable
     elif movable_element_dict["type"] == "BOT":
         del movable_element_dict["type"]
-        movable_element_model = BotModelMock(**movable_element_dict)
+        facing_direction = to_optional_direction(movable_element_dict["facing_direction"])
+        movable_element_model = BotModelMock(**dict(movable_element_dict, facing_direction=facing_direction))
         movable = Bot(movable_element_model)
         return movable
     else:
