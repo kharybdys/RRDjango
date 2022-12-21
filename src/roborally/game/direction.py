@@ -41,3 +41,10 @@ def get_to_direction(from_direction: Optional[Direction], turns: int) -> Optiona
         return from_direction.turn(turns)
     else:
         return None
+
+
+def to_optional_direction(direction_name: Optional[str]) -> Optional[Direction]:
+    if not direction_name:
+        return None
+    else:
+        return Direction(direction_name)

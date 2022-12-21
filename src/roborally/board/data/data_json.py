@@ -3,7 +3,7 @@ from dataclasses import asdict, dataclass, field
 from typing import Optional
 
 from roborally.board.data.loader import BoardLoader, BoardDataProvider, ScenarioDataProvider
-from roborally.game.direction import Direction
+from roborally.game.direction import Direction, to_optional_direction
 from roborally.models import ElementTypes
 
 
@@ -32,7 +32,7 @@ class ScenarioBoardData:
 
 class JSONBoardDataProvider(BoardDataProvider):
     def __init__(self, board_data: list[dict]):
-        board_elements = [BoardElementData(**element) for element in board_data]
+        board_elements = [self._to_board_element_data(element) for element in board_data]
         self.max_x = 0
         self.max_y = 0
 
@@ -43,6 +43,11 @@ class JSONBoardDataProvider(BoardDataProvider):
         self.elements = [asdict(element) for element in board_elements if element.element_type not in [ElementTypes.WALL, ElementTypes.LASER]]
         self.walls = [asdict(element) for element in board_elements if element.element_type == ElementTypes.WALL]
         self.lasers = [asdict(element) for element in board_elements if element.element_type == ElementTypes.LASER]
+
+    @staticmethod
+    def _to_board_element_data(element_dict: dict):
+        direction = to_optional_direction(element_dict.get("direction", None))
+        return BoardElementData(**dict(element_dict, direction=direction))
 
 
 class JSONScenarioDataProvider(ScenarioDataProvider):

@@ -87,7 +87,7 @@ class BoardLoader:
         for wall in walls:
             if wall['direction'] is None:
                 raise Exception("Walls require a direction")
-            self.walls[Point(wall['x_coordinate'], wall['y_coordinate'])].add(Direction(wall['direction']))
+            self.walls[Point(wall['x_coordinate'], wall['y_coordinate'])].add(wall['direction'])
 
         for laser in lasers:
             if laser['direction'] is None:
@@ -96,7 +96,7 @@ class BoardLoader:
             if self.lasers.get(laser_key):
                 self.lasers[laser_key].hits += 1
             else:
-                self.lasers[laser_key] = Laser(Direction(laser['direction']))
+                self.lasers[laser_key] = Laser(laser['direction'])
 
         top_left = trans_func({'x_coordinate': 0, 'y_coordinate': 0, 'direction': Direction.NORTH})
         bottom_right = trans_func({'x_coordinate': board_data_provider.max_x, 'y_coordinate': board_data_provider.max_y, 'direction': Direction.NORTH})
