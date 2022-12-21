@@ -149,7 +149,7 @@ class Scenario(SerializationMixin):
                 return self.determine_laser_end(new_coordinates, direction, ignore_bots)
 
     def update_movable_coordinates_and_direction(self, movable: BasicMovableElement, new_coordinates: Point, new_direction: Direction):
-        match movable.__class__:
+        match movable:
             case Bot():
                 movables = self.bots
             case Flag():
