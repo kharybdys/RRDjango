@@ -1,0 +1,36 @@
+{
+  "flags": [{
+    "x_coordinate": 0,
+    "y_coordinate": 0,
+    "order_number": 1
+  }],
+  "boards": [{
+    "turns": 0,
+    "offset_x": 0,
+    "offset_y": 0,
+    "board_data": [{
+      "x_coordinate": 0,
+      "y_coordinate": 0,
+      "element_type": "BASIC",
+      "direction" : "NORTH"
+    },
+    {
+      "x_coordinate": 1,
+      "y_coordinate": 0,
+      "element_type": "BASIC",
+      "direction" : "NORTH"
+    },
+    {
+      "x_coordinate": 0,
+      "y_coordinate": 1,
+      "element_type": "BASIC",
+      "direction" : "NORTH"
+    },
+    {
+      "x_coordinate": 1,
+      "y_coordinate": 1,
+      "element_type": "BASIC",
+      "direction" : "NORTH"
+    }]
+  }]
+}

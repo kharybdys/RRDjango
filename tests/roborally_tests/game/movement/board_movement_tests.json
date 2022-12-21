@@ -1,0 +1,66 @@
+[
+  {
+    "test_id": "Bot turns one on basic",
+    "movable": {
+      "type": "BOT",
+      "x_coordinate": 0,
+      "y_coordinate": 0,
+      "order_number": 1,
+      "facing_direction": "NORTH"
+    },
+    "movement": {
+      "direction": "SOUTH",
+      "steps": 0,
+      "turns": 1,
+      "priority": 80,
+      "movement_type": "ROBOT"
+    },
+    "expectation": {
+      "x_coordinate": 0,
+      "y_coordinate": 0,
+      "facing_direction": "EAST"
+    }
+  },
+  {
+    "test_id": "Flag moves south on basic",
+    "movable": {
+      "type": "FLAG",
+      "x_coordinate": 0,
+      "y_coordinate": 0,
+      "order_number": 1
+    },
+    "movement": {
+      "direction": "SOUTH",
+      "steps": 1,
+      "turns": 0,
+      "priority": 80,
+      "movement_type": "ROBOT"
+    },
+    "expectation": {
+      "x_coordinate": 0,
+      "y_coordinate": 1
+    }
+  },
+  {
+    "test_id": "Bot dies stepping off board",
+    "movable": {
+      "type": "BOT",
+      "x_coordinate": 0,
+      "y_coordinate": 0,
+      "order_number": 1,
+      "facing_direction": "NORTH"
+    },
+    "movement": {
+      "direction": "NORTH",
+      "steps": 1,
+      "turns": 0,
+      "priority": 80,
+      "movement_type": "ROBOT"
+    },
+    "expectation": {
+      "x_coordinate": 0,
+      "y_coordinate": 0,
+      "expected_exception": "MovableElementKilledEvent"
+    }
+  }
+]
