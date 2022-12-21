@@ -1,4 +1,4 @@
-from roborally.board.data.data_db import ScenarioDataProvider
+from roborally.board.data.data_django import DjangoScenarioDataProvider
 from roborally.board.scenario import Scenario
 from roborally.game.bot import Bot
 from roborally.game.events import EventException
@@ -10,7 +10,7 @@ from roborally.models import Game as GameModel
 class Game:
     def __init__(self, game_id: int):
         self.model = GameModel.objects.get(pk=game_id)
-        scenario_data_provider = ScenarioDataProvider(self.model.scenario_name)
+        scenario_data_provider = DjangoScenarioDataProvider(self.model.scenario_name)
         self.scenario = Scenario(scenario_data_provider=scenario_data_provider, load_flags=False)
         self._load_flags()
         self._load_bots()

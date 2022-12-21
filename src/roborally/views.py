@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import generic
 
-from roborally.board.data.data_db import DjangoScenarioDataProvider
+from roborally.board.data.data_django import DjangoScenarioDataProvider
 from roborally.models import Game, History, GameForm, Bot, ScenarioName
 from roborally.board.scenario import Scenario
 
