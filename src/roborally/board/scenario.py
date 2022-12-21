@@ -183,7 +183,7 @@ class Scenario(SerializationMixin):
         new_coordinates = current_coordinates
         for _ in range(0, movement.steps):
             new_coordinates = new_coordinates.neighbour(movement.direction)
-        if new_coordinates in filter(lambda p: not movement.moved_object.coordinates, self.bots.keys()):
+        if new_coordinates in filter(lambda p: not isinstance(movement.moved_object, Bot) or not movement.moved_object.coordinates, self.bots.keys()):
             # TODO: This is too simplistic, pushing (if movement_type is robot) is missing
             raise BotCollisionEvent
         if self.elements[current_coordinates].get_neighbour(movement.direction).KILLS:
