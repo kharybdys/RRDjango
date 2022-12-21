@@ -3,7 +3,7 @@ from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import generic
 
-from roborally.board.loader import ScenarioDataProvider
+from roborally.board.data.data_db import DjangoScenarioDataProvider
 from roborally.models import Game, History, GameForm, Bot, ScenarioName
 from roborally.board.scenario import Scenario
 
@@ -11,7 +11,7 @@ from roborally.board.scenario import Scenario
 # Test canvas
 class CanvasView(generic.TemplateView):
     template_name = 'roborally/canvas.html'
-    scenario_data_provider = ScenarioDataProvider(ScenarioName.RISKY_EXCHANGE)
+    scenario_data_provider = DjangoScenarioDataProvider(ScenarioName.RISKY_EXCHANGE)
     board_data = Scenario(scenario_data_provider, True).to_data()
 
     def get_context_data(self, **kwargs):

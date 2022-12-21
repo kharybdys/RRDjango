@@ -1,4 +1,6 @@
+from abc import ABC, abstractmethod
 from collections import defaultdict
+from typing import Iterable
 
 import roborally.game.direction
 from roborally.board.basic import Point
@@ -6,35 +8,18 @@ from roborally.board.element import conveyor, pusher, rotator, basic
 from roborally.board.element.basic import BasicElement
 from roborally.board.laser import Laser
 from roborally.game.direction import Direction
-from roborally.models import ScenarioBoard, BoardElement, ElementTypes, ScenarioFlag
+from roborally.models import ElementTypes
 
 
-class BoardDataProvider:
-    def __init__(self, board_name: str):
-        board = BoardElement.objects.filter(name=board_name)
-
-        self.max_x = 0
-        self.max_y = 0
-
-        for board_element in board:
-            self.max_x = max(self.max_x, board_element.x_coordinate)
-            self.max_y = max(self.max_y, board_element.y_coordinate)
-
-        self.elements = map(BoardElement.to_dict,
-                            board.exclude(element_type__in=[ElementTypes.WALL, ElementTypes.LASER]))
-        self.walls = map(BoardElement.to_dict, board.filter(element_type=ElementTypes.WALL))
-        self.lasers = map(BoardElement.to_dict, board.filter(element_type=ElementTypes.LASER))
+class BoardDataProvider(ABC):
+    max_x: int
+    max_y: int
+    walls: Iterable[dict]
+    lasers: Iterable[dict]
+    elements: Iterable[dict]
 
 
-class ScenarioDataProvider:
-    def __init__(self, scenario_name: str):
-        self.flags = ScenarioFlag.objects.filter(name=scenario_name)
-        self.boards = ScenarioBoard.objects.filter(name=scenario_name)
-
-    def get_loader_for_boards(self):
-        return [BoardLoader(board.turns, board.offset_x, board.offset_y, BoardDataProvider(board.board_name)) for board in self.boards]
-
-
+# TODO: Is this a loader or maybe more a transformer?
 class BoardLoader:
     def __init__(self, turns: int, offset_x: int, offset_y: int, board_data_provider: BoardDataProvider):
         self.transform = Transform(turns, offset_x, offset_y)
@@ -162,3 +147,11 @@ class Transform:
             result['direction'] = roborally.game.direction.get_to_direction(result['direction'], self.turns)
             return result
         return transform
+
+
+class ScenarioDataProvider(ABC):
+    flags: Iterable
+
+    @abstractmethod
+    def get_loader_for_boards(self) -> list[BoardLoader]:
+        pass

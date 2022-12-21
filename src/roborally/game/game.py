@@ -1,4 +1,4 @@
-from roborally.board.loader import ScenarioDataProvider
+from roborally.board.data.data_db import ScenarioDataProvider
 from roborally.board.scenario import Scenario
 from roborally.game.bot import Bot
 from roborally.game.events import EventException

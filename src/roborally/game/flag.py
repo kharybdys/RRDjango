@@ -6,6 +6,8 @@ from roborally.models import ScenarioFlag
 
 class Flag(BasicMovableElement):
 
+    # TODO: Should also allow Flag as a Model.
+    # Possibly when coming from a scenario the ScenarioFlag should be transformed into a flag?
     def __init__(self, flag: ScenarioFlag):
         super().__init__()
         self.model = flag
