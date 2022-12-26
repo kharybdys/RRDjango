@@ -1,9 +1,30 @@
 {% extends "roborally/index.html" %}
 
 {% block content %}
-    <form action="{% url 'roborally:new' %}" method="post">
-        {% csrf_token %}
-        {{ form }}
-        <input type="submit" value="Create">
-    </form>
+    <script>
+        function load_scenario_preview(scenario_name) {
+            const scenario_preview = document.getElementById('scenario_preview')
+            fetch(new Request('/roborally/scenario/' + scenario_name))
+                .then((response) => response.text())
+                .then((text) => {
+                    scenario_preview.innerHTML=text
+                    const roborally = new Roborally(JSON.parse(document.getElementById('board_data').textContent), 'board');
+                    roborally.draw_canvas();
+                })
+        }
+    </script>
+    <div class="d-flex">
+        <div>
+            <form action="{% url 'roborally:new' %}" method="post">
+                {% csrf_token %}
+                <table>
+                {{ form.as_table }}
+                </table>
+                <input type="submit" value="Create">
+            </form>
+        </div>
+        <div id="scenario_preview">
+
+        </div>
+    </div>
 {% endblock content %}

@@ -5,7 +5,8 @@ from django.views import generic
 
 from roborally.board.data.data_django import DjangoScenarioDataProvider
 from roborally.game.events import DummyEventHandler
-from roborally.models import Game, History, GameForm, Bot
+from roborally.models import Game, History, Bot
+from roborally.forms import GameForm
 from roborally.board.scenario import Scenario
 
 

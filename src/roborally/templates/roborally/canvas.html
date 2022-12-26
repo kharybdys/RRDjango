@@ -1,15 +1,4 @@
-{% extends "roborally/index.html" %}
+{{ board|json_script:"board_data" }}
+<canvas id="board">
 
-{% block content %}
-    {{ board|json_script:"board_data" }}
-    <canvas id="board">
-
-    </canvas>
-    <script defer>
-        onload = (_) => {
-            const roborally = new Roborally(JSON.parse(document.getElementById('board_data').textContent), 'board');
-            roborally.draw_canvas();
-        };
-    </script>
-
-{% endblock content %}
+</canvas>

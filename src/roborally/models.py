@@ -1,6 +1,5 @@
 from django.contrib.auth.models import User
 from django.db import models
-from django.forms import ModelForm, ModelMultipleChoiceField
 
 from roborally.game.direction import Direction
 from roborally.game.card import CardDefinition
@@ -174,13 +173,6 @@ class Game(models.Model):
                                       victim=victim,
                                       extra=kwargs)
         event.save()
-
-
-class GameForm(ModelForm):
-    class Meta:
-        model = Game
-        fields = ['name', 'scenario_name']
-    users = ModelMultipleChoiceField(queryset=User.objects.all())
 
 
 class Flag(models.Model):
