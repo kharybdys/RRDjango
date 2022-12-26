@@ -9,33 +9,29 @@ class EventHandler:
         self.game = game
         self.phase = 1
 
-    def _log_event(self, event_type: EventType, actor: Bot = None, victim: Bot = None, **kwargs):
-        self.game.log_event(self.phase, event_type, actor, victim, **kwargs)
+    def _log_event(self, event_type: EventType, actor: Movable = None, victim: Movable = None, **kwargs):
+        if (not actor or isinstance(actor, Bot)) and (not victim or isinstance(victim, Bot)):
+            self.game.log_event(self.phase, event_type, actor, victim, **kwargs)
+        else:
+            # TODO: Support logging events on flags
+            print(f"{event_type=}, {actor=}, {victim=}")
 
     def log_movable_collides_against_wall(self, movable: Movable):
-        if isinstance(movable, Bot):
-            self._log_event(event_type=EventType.BOT_HITS_WALL, actor=movable)
-        else:
-            # Flags colliding is not interesting?
-            pass
+        self._log_event(event_type=EventType.BOT_HITS_WALL, actor=movable)
 
     def log_movable_collides_against_movable(self, actor: Movable, victim: Movable):
-        if isinstance(actor, Bot) and isinstance(victim, Bot):
-            self._log_event(event_type=EventType.BOT_HITS_UNMOVABLE_BOT, actor=actor, victim=victim)
-        else:
-            # Flags colliding is not interesting?
-            pass
+        self._log_event(event_type=EventType.BOT_HITS_UNMOVABLE_BOT, actor=actor, victim=victim)
 
     def log_movable_killed_hole(self, movable: Movable):
-        if isinstance(movable, Bot):
-            self._log_event(event_type=EventType.BOT_DIES_HOLE, actor=movable)
-        else:
-            # TODO: Support logging events on flags
-            print("Flag died, TODO")
+        self._log_event(event_type=EventType.BOT_DIES_HOLE, actor=movable)
 
     def log_board_movement_impossible(self, movable: Movable):
-        if isinstance(movable, Bot):
-            self._log_event(event_type=EventType.CONVEYORBELT_STALL, actor=movable)
-        else:
-            # TODO: Support logging events on flags
-            print("Flag cannot move due to blocking items, TODO")
+        self._log_event(event_type=EventType.CONVEYORBELT_STALL, actor=movable)
+
+
+class DummyEventHandler(EventHandler):
+    def __init__(self):
+        super().__init__(None)
+
+    def _log_event(self, event_type: EventType, actor: Movable = None, victim: Movable = None, **kwargs):
+        print(f"{event_type=}, {actor=}, {victim=}")

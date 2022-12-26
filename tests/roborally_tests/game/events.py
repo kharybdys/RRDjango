@@ -1,7 +1,6 @@
 from dataclasses import dataclass, field
 
 from roborally.game.basic import Movable
-from roborally.game.bot import Bot
 from roborally.game.events import EventHandler
 from roborally.models import EventType
 
@@ -36,7 +35,7 @@ class TestEventHandler(EventHandler):
     def add_expected_event(self, expected_event: ExpectedEvent):
         self.expected_events.append(expected_event)
 
-    def _log_event(self, event_type: EventType, actor: Bot = None, victim: Bot = None, **kwargs):
+    def _log_event(self, event_type: EventType, actor: Movable = None, victim: Movable = None, **kwargs):
         expected_event = ExpectedEvent.create_one(event_type, self.phase, actor, victim, **kwargs)
         # Throws ValueError if not found which is what we want for the test
         self.expected_events.remove(expected_event)
