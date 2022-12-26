@@ -1,17 +1,12 @@
-from typing import Type
-
-from roborally.game import events
 from roborally.game.basic import BasicMovableElement
 from roborally.game.bot import Bot
-from roborally_tests.mocks import CoordinatesWithDirection
+from roborally_tests.mocks import Expectation
 
 
-def get_movement_event_exception_class(class_name) -> Type[events.EventException]:
-    return getattr(events, class_name)
-
-
-def verify(movable: BasicMovableElement, expectation: CoordinatesWithDirection):
+def verify(movable: BasicMovableElement, expectation: Expectation):
     assert movable.coordinates.x == expectation.x_coordinate
     assert movable.coordinates.y == expectation.y_coordinate
-    if isinstance(movable, Bot):
+    if isinstance(movable, Bot) and expectation.facing_direction:
         assert movable.facing_direction == expectation.facing_direction
+    if expectation.event_handler:
+        assert expectation.event_handler.happened

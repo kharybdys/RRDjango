@@ -1,6 +1,7 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.forms import ModelForm, ModelMultipleChoiceField
+from django_mysql.models import DynamicField
 
 from roborally.game.direction import Direction
 from roborally.game.card import CardDefinition
@@ -166,6 +167,15 @@ class Game(models.Model):
     def __str__(self):
         return f'{self.name}[{self.id}]'
 
+    def log_event(self, phase: int, event_type: EventType, actor=None, victim=None, **kwargs):
+        event = self.event_set.create(round=self.current_round,
+                                      phase=phase,
+                                      event_type=event_type,
+                                      actor=actor,
+                                      victim=victim,
+                                      extra=kwargs)
+        event.save()
+
 
 class GameForm(ModelForm):
     class Meta:
@@ -241,6 +251,7 @@ class Event(models.Model):
     type = models.CharField(choices=EventType.choices,
                             max_length=32
                             )
+    extra = DynamicField()
     optional_text = models.CharField(max_length=250)
     created_by = models.CharField(max_length=250, default='internal')
     created_at = models.DateTimeField(auto_now_add=True)

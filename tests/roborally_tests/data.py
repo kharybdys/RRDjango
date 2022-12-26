@@ -1,23 +1,10 @@
-from contextlib import contextmanager
-from typing import Any
-
-import pytest
-
-from roborally_tests.game.movement.data import get_movement_event_exception_class
 from roborally.game.direction import to_optional_direction
-from roborally_tests.mocks import CoordinatesWithDirection
+from roborally_tests.game.events import get_test_event_handler_for
+from roborally_tests.mocks import Expectation
 
 
-def to_expectation(expectation_dict: dict) -> (CoordinatesWithDirection, Any):
+def to_expectation(expectation_dict: dict) -> Expectation:
     direction = to_optional_direction(expectation_dict.get("facing_direction", None))
-    expected_exception = expectation_dict.pop("expected_exception", None)
-    if expected_exception:
-        context_manager =  pytest.raises(get_movement_event_exception_class(expected_exception))
-    else:
-        context_manager = does_not_raise()
-    return CoordinatesWithDirection(**dict(expectation_dict, facing_direction=direction)), context_manager
-
-
-@contextmanager
-def does_not_raise():
-    yield
+    expected_event = expectation_dict.pop("expected_event", None)
+    event_handler = get_test_event_handler_for(expected_event)
+    return Expectation(**dict(expectation_dict, facing_direction=direction, event_handler=event_handler))

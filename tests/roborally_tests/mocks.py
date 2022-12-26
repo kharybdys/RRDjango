@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 
 from roborally.game.direction import Direction
+from roborally_tests.game.events import TestEventHandler
 
 
 @dataclass
@@ -24,7 +25,12 @@ class FlagModelMock(Coordinates):
 
 @dataclass
 class BotModelMock(CoordinatesWithDirection):
-    order_number: int
+    order_number: int = 0
 
     def save(self):
         pass
+
+
+@dataclass
+class Expectation(CoordinatesWithDirection):
+    event_handler: TestEventHandler = None

@@ -37,7 +37,7 @@ class CardType(Enum):
             case self.U_TURN:
                 return 2
             case self.ROTATE_LEFT:
-                return -1
+                return 3
             case self.ROTATE_RIGHT:
                 return 1
             case _:

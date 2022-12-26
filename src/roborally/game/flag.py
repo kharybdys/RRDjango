@@ -5,6 +5,8 @@ from roborally.models import ScenarioFlag
 
 
 class Flag(BasicMovableElement):
+    PUSHABLE = False
+    PUSHES = False
 
     # TODO: Should also allow Flag as a Model.
     # Possibly when coming from a scenario the ScenarioFlag should be transformed into a flag?

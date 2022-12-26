@@ -44,6 +44,8 @@ class Point(SerializationMixin):
                 return Point(self.x - 1, self.y)
             case Direction.EAST:
                 return Point(self.x + 1, self.y)
+            case _:
+                raise ValueError(f"Unsupported direction {direction}")
 
     def to_data(self) -> dict:
         return {self.KEY_X: self.x, self.KEY_Y: self.y}

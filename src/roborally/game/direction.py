@@ -26,7 +26,7 @@ class Direction(Enum):
                 raise ValueError(f"Unsupported direction {self}")
 
     def turns_to(self, to_direction: Self):
-        return to_direction.to_int() - self.to_int() % 4
+        return (to_direction.to_int() - self.to_int()) % 4
 
     def turn(self, turns: int):
         to_direction_int = (self.to_int() + turns) % 4

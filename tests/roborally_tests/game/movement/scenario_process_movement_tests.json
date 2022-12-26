@@ -60,7 +60,7 @@
     "expectation": {
       "x_coordinate": 0,
       "y_coordinate": 0,
-      "expected_exception": "MovableElementKilledEvent"
+      "expected_event": "MOVABLE_DIED"
     }
   }
 ]

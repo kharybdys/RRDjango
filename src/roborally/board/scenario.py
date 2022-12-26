@@ -1,22 +1,26 @@
-from collections import defaultdict
+from collections import defaultdict, Counter
 
 import roborally.game.direction
 from roborally.board.basic import Point
 from roborally.board.element import basic
+from roborally.board.element.conveyor import Conveyor, DualSpeedConveyor
+from roborally.board.element.pusher import Pusher
+from roborally.board.element.rotator import Rotator
 from roborally.board.laser import Laser
 from roborally.board.data.loader import BoardLoader, ScenarioDataProvider
 from roborally.game.basic import BasicMovableElement
 from roborally.game.direction import Direction
 from roborally.game.bot import Bot
-from roborally.game.events import WallCollisionEvent, BotCollisionEvent, MovableElementKilledEvent
+from roborally.game.events import EventHandler
 from roborally.game.flag import Flag
-from roborally.game.movement import Movement
+from roborally.game.movement import Movement, MovementPossibility
 from roborally.utils.codec import SerializationMixin
 
 
 class Scenario(SerializationMixin):
 
-    def __init__(self, scenario_data_provider: ScenarioDataProvider, load_flags: bool = False):
+    def __init__(self, scenario_data_provider: ScenarioDataProvider, event_handler: EventHandler, load_flags: bool = False):
+        self.event_handler = event_handler
         self.y_size = 0
         self.x_size = 0
         self.elements: dict[Point, basic.BasicElement] = {}
@@ -122,7 +126,8 @@ class Scenario(SerializationMixin):
             laser_end = self.determine_laser_end(coordinates, direction, True)
             laser_data = laser.to_data()
             laser_data.update(coordinates.to_data())
-            laser_data['laser_path'] = list(map(lambda p: p.to_data(), self._generate_laser_path(coordinates, laser_end)))
+            laser_data['laser_path'] = list(
+                map(lambda p: p.to_data(), self._generate_laser_path(coordinates, laser_end)))
             board_data['lasers'].append(laser_data)
 
         for coordinates, flag in self.flags.items():
@@ -148,46 +153,80 @@ class Scenario(SerializationMixin):
             else:
                 return self.determine_laser_end(new_coordinates, direction, ignore_bots)
 
-    def update_movable_coordinates_and_direction(self, movable: BasicMovableElement, new_coordinates: Point, new_direction: Direction):
-        match movable:
+    def update_movable_coordinates_and_direction(self, move: MovementPossibility):
+        match move.movable:
             case Bot():
                 movables = self.bots
             case Flag():
                 movables = self.flags
             case _:
-                raise ValueError(f"Updating movable of type {movable.__class__} not supported")
-        self._update_movable_coordinates_and_direction(movable, new_coordinates, new_direction, movables)
+                raise ValueError(f"Updating movable of type {move.movable.__class__} not supported")
+        self._update_movable_coordinates_and_direction(move, movables)
 
     @staticmethod
-    def _update_movable_coordinates_and_direction(movable: BasicMovableElement, new_coordinates: Point, new_direction: Direction, movables: dict[Point, BasicMovableElement]):
+    def _update_movable_coordinates_and_direction(move: MovementPossibility, movables: dict[Point, BasicMovableElement]):
         # movable should be found in the scenario at the current movable coordinates, remove it from there.
-        if movables[movable.coordinates] == movable:
-            del movables[movable.coordinates]
-            movable.update_coordinates_and_direction(new_coordinates, new_direction)
-            movables[new_coordinates] = movable
+        if movables[move.movable.coordinates] == move.movable:
+            del movables[move.movable.coordinates]
+            move.movable.update_coordinates_and_direction(move.new_coordinates, move.new_direction)
+            movables[move.new_coordinates] = move.movable
         else:
-            raise Exception(f"Movable {movable.order_number} not found on expected coordinates: {movable.coordinates}")
+            raise Exception(f"Movable {move.movable.order_number} not found on expected coordinates: {move.movable.coordinates}")
 
-    def all_board_movements(self, phase: int) -> list[Movement]:
-        result = []
-        for (coordinates, flag) in self.flags.items():
-            result.extend(self.elements[coordinates].board_movements(phase, flag))
-        for (coordinates, bot) in self.bots.items():
-            result.extend(self.elements[coordinates].board_movements(phase, bot))
-        return result
-
-    def process_movement(self, movement: Movement):
+    def _process_movement(self, movement: Movement, ignore_movable_collision: bool = False) -> MovementPossibility:
         current_coordinates = movement.moved_object.coordinates
         if movement.direction in self.walls[current_coordinates]:
-            raise WallCollisionEvent
+            self.event_handler.log_movable_collides_against_wall(movement.moved_object)
+            return MovementPossibility.from_movable(self.event_handler, movement.moved_object)
         new_coordinates = current_coordinates
         for _ in range(0, movement.steps):
             new_coordinates = new_coordinates.neighbour(movement.direction)
-        if new_coordinates in filter(lambda p: not isinstance(movement.moved_object, Bot) or not movement.moved_object.coordinates, self.bots.keys()):
+        if not ignore_movable_collision and movement.moved_object.PUSHES and new_coordinates != movement.moved_object.coordinates and (pushed := self.bots.get(new_coordinates, None)):
             # TODO: This is too simplistic, pushing (if movement_type is robot) is missing
-            raise BotCollisionEvent
+            self.event_handler.log_movable_collides_against_movable(movement.moved_object, pushed)
+            return MovementPossibility.from_movable(self.event_handler, movement.moved_object)
         if self.elements[current_coordinates].get_neighbour(movement.direction).KILLS:
             # TODO: Handle movable being killed
-            raise MovableElementKilledEvent
+            self.event_handler.log_movable_killed_hole(movement.moved_object)
+            return MovementPossibility.from_movable(self.event_handler, movement.moved_object)
         new_direction = movement.moved_object.facing_direction.turn(movement.turns)
-        self.update_movable_coordinates_and_direction(movement.moved_object, new_coordinates, new_direction)
+        return MovementPossibility(event_handler=self.event_handler,
+                                   movable=movement.moved_object,
+                                   new_coordinates=new_coordinates,
+                                   new_direction=new_direction)
+
+    def process_movement(self, movement: Movement):
+        movement_possibility = self._process_movement(movement)
+        if not movement_possibility.is_noop():
+            self.update_movable_coordinates_and_direction(movement_possibility)
+
+    @staticmethod
+    def _get_duplicated_target_coordinates(possible_movements: list[MovementPossibility]) -> Point | None:
+        counted_target_coordinates = Counter([m.new_coordinates for m in possible_movements])
+        duplicated_target_coordinates, duplication = counted_target_coordinates.most_common(1)
+        if duplication == 1:
+            return None
+        else:
+            return duplicated_target_coordinates
+
+    def process_board_movements(self, phase: int) -> None:
+        board_movement_order = [DualSpeedConveyor, Conveyor, Rotator, Pusher]
+        for current_board_movement_type in board_movement_order:
+            # Build list of movement possibilities
+            possible_movements: list[MovementPossibility] = []
+            for (coordinates, movable) in [*self.flags.items(), *self.bots.items()]:
+                board_element = self.elements[coordinates]
+                if isinstance(board_element, current_board_movement_type):
+                    movement = self.elements[coordinates].board_movements(phase, movable)
+                    if movement:
+                        possible_movements.append(self._process_movement(movement, ignore_movable_collision=True))
+                    else:
+                        possible_movements.append(MovementPossibility.from_movable(self.event_handler, movable))
+                else:
+                    possible_movements.append(MovementPossibility.from_movable(self.event_handler, movable))
+            # Repeatedly filter this list until no duplicate target coordinates remain
+            while duplicated_coordinates := self._get_duplicated_target_coordinates(possible_movements):
+                possible_movements = list(map(lambda m: m.cancel_if_target_coord_matches(duplicated_coordinates), possible_movements))
+            # Now execute these movements if they aren't no-op
+            for move in filter(lambda m: not m.is_noop(), possible_movements):
+                self.update_movable_coordinates_and_direction(move)

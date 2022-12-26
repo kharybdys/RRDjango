@@ -1,7 +1,7 @@
 from roborally.game.basic import BasicMovableElement
 from roborally.game.bot import Bot
 
-from roborally.game.direction import to_optional_direction
+from roborally.game.direction import to_optional_direction, Direction
 from roborally.game.flag import Flag
 from roborally.game.movement import Movement
 from roborally_tests.mocks import FlagModelMock, BotModelMock
@@ -21,6 +21,10 @@ def to_movable(movable_element_dict: dict) -> BasicMovableElement:
         return movable
     else:
         raise ValueError(f"Unsupported movable element type: {type}")
+
+
+def to_bot(x: int, y: int, direction: Direction) -> Bot:
+    return Bot(BotModelMock(x_coordinate=x, y_coordinate=y, facing_direction=direction))
 
 
 def to_movement(movement_dict: dict, movable: BasicMovableElement) -> Movement:

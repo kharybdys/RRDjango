@@ -11,13 +11,13 @@ class Rotator(BasicElement, metaclass=ABCMeta):
         super().__init__()
         self.turns = 0
 
-    def board_movements(self, phase: int, movable: BasicMovableElement):
-        return [movement.Movement(direction=None,
-                                  steps=0,
-                                  turns=self.turns,
-                                  priority=0,
-                                  movement_type=movement.TYPE_ROTATOR,
-                                  moved_object=movable)]
+    def board_movements(self, phase: int, movable: BasicMovableElement) -> movement.Movement | None:
+        return movement.Movement(direction=None,
+                                 steps=0,
+                                 turns=self.turns,
+                                 priority=0,
+                                 movement_type=movement.TYPE_ROTATOR,
+                                 moved_object=movable)
 
 
 class ClockwiseRotator(Rotator):

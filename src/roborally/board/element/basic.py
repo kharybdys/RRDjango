@@ -21,8 +21,8 @@ class BasicElement(SerializationMixin):
         return {self.KEY_ELEMENT_TYPE: self.__class__.__name__}
 
     # to be overridden, but a basic element simply does nothing
-    def board_movements(self, phase: int, movable: BasicMovableElement) -> list[Movement]:
-        return []
+    def board_movements(self, phase: int, movable: BasicMovableElement) -> Movement | None:
+        return None
 
     def get_neighbour(self, direction: Direction) -> Self:
         return self.neighbours.get(direction)
