@@ -1,6 +1,6 @@
 from typing import Self
 
-from roborally.game.basic import BasicMovableElement
+from roborally.game.basic import Movable
 from roborally.game.direction import Direction
 from roborally.game.movement import Movement
 from roborally.utils.codec import SerializationMixin
@@ -21,7 +21,7 @@ class BasicElement(SerializationMixin):
         return {self.KEY_ELEMENT_TYPE: self.__class__.__name__}
 
     # to be overridden, but a basic element simply does nothing
-    def board_movements(self, phase: int, movable: BasicMovableElement) -> Movement | None:
+    def board_movements(self, phase: int, movable: Movable) -> Movement | None:
         return None
 
     def get_neighbour(self, direction: Direction) -> Self:

@@ -3,7 +3,7 @@ from abc import ABCMeta
 import roborally.game.direction
 from roborally.board.element.basic import BasicElement
 from roborally.game import movement
-from roborally.game.basic import BasicMovableElement
+from roborally.game.basic import Movable
 from roborally.game.direction import Direction
 
 
@@ -31,7 +31,7 @@ class Conveyor(BasicElement, metaclass=ABCMeta):
         element_data['end_direction'] = self.end_direction.value
         return element_data
 
-    def board_movements(self, phase: int, movable: BasicMovableElement) -> movement.Movement:
+    def board_movements(self, phase: int, movable: Movable) -> movement.Movement:
         neighbour = self.get_neighbour(self.end_direction)
         return movement.Movement(direction=self.end_direction,
                                  steps=1,

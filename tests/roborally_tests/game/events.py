@@ -1,6 +1,6 @@
 from dataclasses import dataclass, field
 
-from roborally.game.basic import BasicMovableElement
+from roborally.game.basic import Movable
 from roborally.game.bot import Bot
 from roborally.game.events import EventHandler
 from roborally.models import EventType
@@ -17,7 +17,7 @@ class ExpectedEvent:
     extra: dict = field(default_factory=dict)
 
     @staticmethod
-    def create_one(event_type: EventType, phase: int, actor: BasicMovableElement | None, victim: BasicMovableElement | None, **kwargs):
+    def create_one(event_type: EventType, phase: int, actor: Movable | None, victim: Movable | None, **kwargs):
         return ExpectedEvent(event_type=str(event_type),
                              phase=phase,
                              actor_type=actor.__class__.__name__ if actor else None,

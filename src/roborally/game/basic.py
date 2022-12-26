@@ -5,7 +5,7 @@ from roborally.game.direction import Direction
 from roborally.utils.codec import SerializationMixin
 
 
-class BasicMovableElement(ABC, SerializationMixin):
+class Movable(ABC, SerializationMixin):
     PUSHABLE = True
     PUSHES = True
     HAS_DIRECTION = True

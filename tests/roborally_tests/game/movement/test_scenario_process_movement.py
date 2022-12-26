@@ -5,7 +5,7 @@ import pytest
 
 from roborally.board.scenario import Scenario
 from roborally.game.movement import Movement
-from roborally.game.basic import BasicMovableElement
+from roborally.game.basic import Movable
 from roborally_tests.game.data import to_movable_movement_and_expectation
 from roborally_tests.game.events import TestEventHandler, ExpectedEvent
 from roborally_tests.mocks import Expectation
@@ -31,7 +31,7 @@ def load_test_data():
 
 @pytest.mark.parametrize('movables, movements, expectations, event_handler', load_test_data())
 def test_scenario_process_movement(get_test_scenario: Scenario,
-                                   movables: list[BasicMovableElement],
+                                   movables: list[Movable],
                                    movements: list[Movement],
                                    expectations: list[Expectation],
                                    event_handler: TestEventHandler):

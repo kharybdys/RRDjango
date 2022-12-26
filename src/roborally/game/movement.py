@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from typing import Self, Optional
 
 from roborally.board.basic import Point
-from roborally.game.basic import BasicMovableElement
+from roborally.game.basic import Movable
 from roborally.game.bot import Bot
 from roborally.game.card import CardDefinition
 from roborally.game.direction import Direction
@@ -17,7 +17,7 @@ TYPE_ROTATOR = 'ROTATOR'
 
 class Movement:
 
-    def __init__(self, direction: Optional[Direction], steps: int, turns: int, priority: int, movement_type: str, moved_object: BasicMovableElement):
+    def __init__(self, direction: Optional[Direction], steps: int, turns: int, priority: int, movement_type: str, moved_object: Movable):
         self.direction = direction
         self.steps = steps
         self.turns = turns
@@ -49,12 +49,12 @@ class Movement:
 @dataclass
 class MovementPossibility:
     event_handler: EventHandler
-    movable: BasicMovableElement
+    movable: Movable
     new_coordinates: Point
     new_direction: Direction
 
     @staticmethod
-    def from_movable(event_handler: EventHandler, movable: BasicMovableElement):
+    def from_movable(event_handler: EventHandler, movable: Movable):
         return MovementPossibility(event_handler, movable, movable.coordinates, movable.facing_direction)
 
     def is_noop(self):

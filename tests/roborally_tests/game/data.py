@@ -1,4 +1,4 @@
-from roborally.game.basic import BasicMovableElement
+from roborally.game.basic import Movable
 from roborally.game.bot import Bot
 
 from roborally.game.direction import to_optional_direction, Direction
@@ -7,7 +7,7 @@ from roborally.game.movement import Movement
 from roborally_tests.mocks import Expectation, MovableModelMock
 
 
-def to_movable_movement_and_expectation(movable_element_dict: dict) -> (BasicMovableElement, Movement, Expectation):
+def to_movable_movement_and_expectation(movable_element_dict: dict) -> (Movable, Movement, Expectation):
     if movable_element_dict["type"] == "Flag":
         cls = Flag
     elif movable_element_dict["type"] == "Bot":

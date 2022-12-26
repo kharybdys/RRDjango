@@ -1,10 +1,10 @@
 from roborally.board.basic import Point
-from roborally.game.basic import BasicMovableElement
+from roborally.game.basic import Movable
 from roborally.game.direction import Direction
 from roborally.models import ScenarioFlag
 
 
-class Flag(BasicMovableElement):
+class Flag(Movable):
     PUSHABLE = False
     PUSHES = False
     HAS_DIRECTION = False

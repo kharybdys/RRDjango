@@ -2,7 +2,7 @@ from abc import ABCMeta
 
 from roborally.board.element.basic import BasicElement
 from roborally.game import movement
-from roborally.game.basic import BasicMovableElement
+from roborally.game.basic import Movable
 
 
 class Rotator(BasicElement, metaclass=ABCMeta):
@@ -11,7 +11,7 @@ class Rotator(BasicElement, metaclass=ABCMeta):
         super().__init__()
         self.turns = 0
 
-    def board_movements(self, phase: int, movable: BasicMovableElement) -> movement.Movement | None:
+    def board_movements(self, phase: int, movable: Movable) -> movement.Movement | None:
         return movement.Movement(direction=None,
                                  steps=0,
                                  turns=self.turns,

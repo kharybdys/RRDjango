@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
 from roborally.board.basic import Point
-from roborally.game.basic import BasicMovableElement
+from roborally.game.basic import Movable
 from roborally.game.direction import Direction
 
 
@@ -27,7 +27,7 @@ class MovableModelMock(CoordinatesWithDirection):
 
 @dataclass
 class Expectation(CoordinatesWithDirection):
-    movable: BasicMovableElement
+    movable: Movable
 
     def verify(self):
         assert self.movable.coordinates.x == self.x_coordinate

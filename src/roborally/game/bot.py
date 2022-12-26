@@ -1,10 +1,10 @@
 from roborally.board.basic import Point
-from roborally.game.basic import BasicMovableElement
+from roborally.game.basic import Movable
 from roborally.game.direction import Direction
 from roborally.models import Bot as BotModel
 
 
-class Bot(BasicMovableElement):
+class Bot(Movable):
     INITIAL_HEALTH = 10
 
     def __init__(self, bot: BotModel):

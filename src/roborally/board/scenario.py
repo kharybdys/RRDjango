@@ -8,7 +8,7 @@ from roborally.board.element.pusher import Pusher
 from roborally.board.element.rotator import Rotator
 from roborally.board.laser import Laser
 from roborally.board.data.loader import BoardLoader, ScenarioDataProvider
-from roborally.game.basic import BasicMovableElement
+from roborally.game.basic import Movable
 from roborally.game.direction import Direction
 from roborally.game.bot import Bot
 from roborally.game.events import EventHandler
@@ -44,7 +44,7 @@ class Scenario(SerializationMixin):
     def add_bot(self, bot: Bot):
         self.bots[bot.coordinates] = bot
 
-    def add_movable(self, movable: BasicMovableElement):
+    def add_movable(self, movable: Movable):
         if isinstance(movable, Bot):
             self.add_bot(movable)
         elif isinstance(movable, Flag):
@@ -164,7 +164,7 @@ class Scenario(SerializationMixin):
         self._update_movable_coordinates_and_direction(move, movables)
 
     @staticmethod
-    def _update_movable_coordinates_and_direction(move: MovementPossibility, movables: dict[Point, BasicMovableElement]):
+    def _update_movable_coordinates_and_direction(move: MovementPossibility, movables: dict[Point, Movable]):
         # movable should be found in the scenario at the current movable coordinates, remove it from there.
         if movables[move.movable.coordinates] == move.movable:
             del movables[move.movable.coordinates]
