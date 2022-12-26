@@ -1,7 +1,6 @@
 from django.contrib.auth.models import User
 from django.db import models
 from django.forms import ModelForm, ModelMultipleChoiceField
-from django_mysql.models import DynamicField
 
 from roborally.game.direction import Direction
 from roborally.game.card import CardDefinition
@@ -251,8 +250,7 @@ class Event(models.Model):
     type = models.CharField(choices=EventType.choices,
                             max_length=32
                             )
-    extra = DynamicField()
-    optional_text = models.CharField(max_length=250)
+    extra = models.CharField(max_length=2500)
     created_by = models.CharField(max_length=250, default='internal')
     created_at = models.DateTimeField(auto_now_add=True)
 
