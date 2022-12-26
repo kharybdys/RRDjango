@@ -8,6 +8,7 @@ from roborally.utils.codec import SerializationMixin
 class BasicMovableElement(ABC, SerializationMixin):
     PUSHABLE = True
     PUSHES = True
+    HAS_DIRECTION = True
 
     def __init__(self):
         self.died_this_turn = False

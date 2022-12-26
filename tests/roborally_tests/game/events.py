@@ -1,4 +1,4 @@
-from abc import ABCMeta
+from dataclasses import dataclass, field
 
 from roborally.game.basic import BasicMovableElement
 from roborally.game.bot import Bot
@@ -6,37 +6,40 @@ from roborally.game.events import EventHandler
 from roborally.models import EventType
 
 
-class HappenedMixin:
-    happened = False
+@dataclass
+class ExpectedEvent:
+    event_type: str
+    phase: int
+    actor_type: str = None
+    actor_order_nr: int = None
+    victim_type: str = None
+    victim_order_nr: int = None
+    extra: dict = field(default_factory=dict)
+
+    @staticmethod
+    def create_one(event_type: EventType, phase: int, actor: BasicMovableElement | None, victim: BasicMovableElement | None, **kwargs):
+        return ExpectedEvent(event_type=str(event_type),
+                             phase=phase,
+                             actor_type=actor.__class__.__name__ if actor else None,
+                             actor_order_nr=actor.order_number if actor else None,
+                             victim_type=actor.__class__.__name__ if victim else None,
+                             victim_order_nr=victim.order_number if victim else None,
+                             extra=kwargs)
+        pass
 
 
-class TestEventHandler(EventHandler, HappenedMixin, metaclass=ABCMeta):
+class TestEventHandler(EventHandler):
     def __init__(self):
         super().__init__(None)
+        self.expected_events: list[ExpectedEvent] = []
+
+    def add_expected_event(self, expected_event: ExpectedEvent):
+        self.expected_events.append(expected_event)
 
     def _log_event(self, event_type: EventType, actor: Bot = None, victim: Bot = None, **kwargs):
-        assert False, "Should not happen"
+        expected_event = ExpectedEvent.create_one(event_type, self.phase, actor, victim, **kwargs)
+        # Throws ValueError if not found which is what we want for the test
+        self.expected_events.remove(expected_event)
 
-
-class BaseTestEventHandler(TestEventHandler):
-    happened = True
-
-
-class MovableDiedEventHandler(TestEventHandler):
-    def log_movable_killed_hole(self, movable: BasicMovableElement):
-        self.happened = True
-
-
-class MovableCollidedWallEventHandler(TestEventHandler):
-    def log_movable_collides_against_wall(self, movable: BasicMovableElement):
-        self.happened = True
-
-
-def get_test_event_handler_for(event_name: str):
-    match event_name:
-        case "MOVABLE_DIED":
-            return MovableDiedEventHandler()
-        case "MOVABLE_COLLIDED_WALL":
-            return MovableCollidedWallEventHandler()
-        case _:
-            return BaseTestEventHandler()
+    def has_events_remaining(self) -> bool:
+        return len(self.expected_events) > 0

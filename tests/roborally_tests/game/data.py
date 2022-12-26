@@ -4,29 +4,41 @@ from roborally.game.bot import Bot
 from roborally.game.direction import to_optional_direction, Direction
 from roborally.game.flag import Flag
 from roborally.game.movement import Movement
-from roborally_tests.mocks import FlagModelMock, BotModelMock
+from roborally_tests.mocks import Expectation, MovableModelMock
 
 
-def to_movable(movable_element_dict: dict) -> BasicMovableElement:
-    if movable_element_dict["type"] == "FLAG":
-        del movable_element_dict["type"]
-        movable_element_model = FlagModelMock(**movable_element_dict)
-        movable = Flag(movable_element_model)
-        return movable
-    elif movable_element_dict["type"] == "BOT":
-        del movable_element_dict["type"]
-        facing_direction = to_optional_direction(movable_element_dict["facing_direction"])
-        movable_element_model = BotModelMock(**dict(movable_element_dict, facing_direction=facing_direction))
-        movable = Bot(movable_element_model)
-        return movable
+def to_movable_movement_and_expectation(movable_element_dict: dict) -> (BasicMovableElement, Movement, Expectation):
+    if movable_element_dict["type"] == "Flag":
+        cls = Flag
+    elif movable_element_dict["type"] == "Bot":
+        cls = Bot
     else:
-        raise ValueError(f"Unsupported movable element type: {type}")
+        raise ValueError(f"Unsupported movable element type: {movable_element_dict['type']}")
+
+    # remove data not used in the MovableModelMock
+    del movable_element_dict["type"]
+    expectation_dict = movable_element_dict.pop("expectation", None)
+    movement_dict = movable_element_dict.pop("movement", None)
+    # Create the movable
+    facing_direction = to_optional_direction(movable_element_dict.get("facing_direction", None))
+    movable_element_model = MovableModelMock(**dict(movable_element_dict, facing_direction=facing_direction))
+    movable = cls(movable_element_model)
+    # Handle movement if applicable
+    if movement_dict:
+        direction = to_optional_direction(movement_dict.get("direction", None))
+        movement = Movement(**dict(movement_dict, direction=direction, moved_object=movable))
+    else:
+        movement = None
+    # Handle expectation if applicable
+    if expectation_dict:
+        direction = to_optional_direction(expectation_dict.get("facing_direction", None))
+        expectation = Expectation(**dict(expectation_dict, facing_direction=direction, movable=movable))
+    else:
+        expectation = None
+    return movable, movement, expectation
 
 
 def to_bot(x: int, y: int, direction: Direction) -> Bot:
-    return Bot(BotModelMock(x_coordinate=x, y_coordinate=y, facing_direction=direction))
+    return Bot(MovableModelMock(x_coordinate=x, y_coordinate=y, facing_direction=direction))
 
 
-def to_movement(movement_dict: dict, movable: BasicMovableElement) -> Movement:
-    direction = to_optional_direction(movement_dict["direction"])
-    return Movement(**dict(movement_dict, direction=direction, moved_object=movable))

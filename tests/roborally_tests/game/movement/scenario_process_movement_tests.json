@@ -1,66 +1,67 @@
 [
   {
     "test_id": "Bot turns one on basic",
-    "movable": {
-      "type": "BOT",
+    "movables": [{
+      "type": "Bot",
       "x_coordinate": 0,
       "y_coordinate": 0,
       "order_number": 1,
-      "facing_direction": "NORTH"
-    },
-    "movement": {
-      "direction": "SOUTH",
-      "steps": 0,
-      "turns": 1,
-      "priority": 80,
-      "movement_type": "ROBOT"
-    },
-    "expectation": {
-      "x_coordinate": 0,
-      "y_coordinate": 0,
-      "facing_direction": "EAST"
-    }
+      "facing_direction": "NORTH",
+      "expectation": {
+        "x_coordinate": 0,
+        "y_coordinate": 0,
+        "facing_direction": "EAST"
+      },
+      "movement": {
+        "direction": "SOUTH",
+        "steps": 0,
+        "turns": 1,
+        "priority": 80,
+        "movement_type": "ROBOT"
+      }
+    }]
   },
   {
     "test_id": "Flag moves south on basic",
-    "movable": {
-      "type": "FLAG",
-      "x_coordinate": 0,
-      "y_coordinate": 0,
-      "order_number": 1
-    },
-    "movement": {
-      "direction": "SOUTH",
-      "steps": 1,
-      "turns": 0,
-      "priority": 80,
-      "movement_type": "ROBOT"
-    },
-    "expectation": {
-      "x_coordinate": 0,
-      "y_coordinate": 1
-    }
-  },
-  {
-    "test_id": "Bot dies stepping off board",
-    "movable": {
-      "type": "BOT",
+    "movables": [{
+      "type": "Flag",
       "x_coordinate": 0,
       "y_coordinate": 0,
       "order_number": 1,
-      "facing_direction": "NORTH"
-    },
-    "movement": {
-      "direction": "NORTH",
-      "steps": 1,
-      "turns": 0,
-      "priority": 80,
-      "movement_type": "ROBOT"
-    },
-    "expectation": {
+      "expectation": {
+        "x_coordinate": 0,
+        "y_coordinate": 1
+      },
+      "movement": {
+        "direction": "SOUTH",
+        "steps": 1,
+        "turns": 0,
+        "priority": 80,
+        "movement_type": "ROBOT"
+      }
+    }]
+  },
+  {
+    "test_id": "Bot dies stepping off board",
+    "movables": [{
+      "type": "Bot",
       "x_coordinate": 0,
       "y_coordinate": 0,
-      "expected_event": "MOVABLE_DIED"
-    }
+      "order_number": 1,
+      "facing_direction": "NORTH",
+      "movement": {
+        "direction": "NORTH",
+        "steps": 1,
+        "turns": 0,
+        "priority": 80,
+        "movement_type": "ROBOT"
+      }
+    }],
+    "expected_events": [{
+      "event_type": "BOT_DIES_HOLE",
+      "phase": 1,
+      "actor_type": "Bot",
+      "actor_order_nr": 1
+    }]
   }
 ]

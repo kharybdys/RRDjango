@@ -1,7 +1,8 @@
 from dataclasses import dataclass
 
+from roborally.board.basic import Point
+from roborally.game.basic import BasicMovableElement
 from roborally.game.direction import Direction
-from roborally_tests.game.events import TestEventHandler
 
 
 @dataclass
@@ -16,15 +17,8 @@ class CoordinatesWithDirection(Coordinates):
 
 
 @dataclass
-class FlagModelMock(Coordinates):
-    order_number: int
-
-    def save(self):
-        pass
-
-
 @dataclass
-class BotModelMock(CoordinatesWithDirection):
+class MovableModelMock(CoordinatesWithDirection):
     order_number: int = 0
 
     def save(self):
@@ -33,4 +27,11 @@ class BotModelMock(CoordinatesWithDirection):
 
 @dataclass
 class Expectation(CoordinatesWithDirection):
-    event_handler: TestEventHandler = None
+    movable: BasicMovableElement
+
+    def verify(self):
+        assert self.movable.coordinates.x == self.x_coordinate
+        assert self.movable.coordinates.y == self.y_coordinate
+        # TODO: Shouldn't depend on PUSHES
+        if self.movable.HAS_DIRECTION:
+            assert self.movable.facing_direction == self.facing_direction
