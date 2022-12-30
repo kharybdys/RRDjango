@@ -1,36 +1,2070 @@
 {
-  "flags": [{
-    "x_coordinate": 0,
-    "y_coordinate": 0,
-    "order_number": 1
-  }],
-  "boards": [{
-    "turns": 0,
-    "offset_x": 0,
-    "offset_y": 0,
-    "board_data": [{
-      "x_coordinate": 0,
-      "y_coordinate": 0,
-      "element_type": "BASIC",
-      "direction" : "NORTH"
-    },
-    {
-      "x_coordinate": 1,
-      "y_coordinate": 0,
-      "element_type": "BASIC",
-      "direction" : "NORTH"
-    },
+  "flags": [
     {
       "x_coordinate": 0,
-      "y_coordinate": 1,
-      "element_type": "BASIC",
-      "direction" : "NORTH"
-    },
+      "y_coordinate": 0,
+      "order_number": 1
+    }
+  ],
+  "boards": [
     {
-      "x_coordinate": 1,
-      "y_coordinate": 1,
-      "element_type": "BASIC",
-      "direction" : "NORTH"
-    }]
-  }]
+      "turns": 0,
+      "offset_x": 0,
+      "offset_y": 0,
+      "board_data": [
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 0,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 1,
+          "element_type": "STARTING_8",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 1,
+          "element_type": "STARTING_7",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 1,
+          "element_type": "STARTING_6",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 1,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 2,
+          "element_type": "OPTION",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 2,
+          "element_type": "STARTING_5",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 2,
+          "element_type": "REPAIR",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 2,
+          "element_type": "STARTING_4",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 2,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 3,
+          "element_type": "OPTION",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 3,
+          "element_type": "STARTING_3",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 3,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 4,
+          "element_type": "STARTING_2",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 4,
+          "element_type": "STARTING_1",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 4,
+          "element_type": "HOLE",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 4,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 5,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 6,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 7,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 8,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 9,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 10,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 11,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 12,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 13,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 14,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 0,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 2,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 3,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 5,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 6,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 7,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 8,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 9,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 10,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 11,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 12,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 13,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 14,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 15,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 16,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 17,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 18,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 19,
+          "y_coordinate": 15,
+          "element_type": "BASIC",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 1,
+          "y_coordinate": 4,
+          "element_type": "WALL",
+          "direction": "NORTH"
+        },
+        {
+          "x_coordinate": 4,
+          "y_coordinate": 1,
+          "element_type": "WALL",
+          "direction": "WEST"
+        }
+      ]
+    }
+  ]
 }
