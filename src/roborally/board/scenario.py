@@ -178,7 +178,7 @@ class Scenario(SerializationMixin):
 
     def _process_movement(self, movement: Movement, ignore_movable_collision: bool = False) -> MovementPossibility:
         current_coordinates = movement.moved_object.coordinates
-        if movement.direction in self.walls[current_coordinates]:
+        if movement.direction in self.walls[current_coordinates] or movement.direction.turn(2) in self.walls[current_coordinates.neighbour(movement.direction)]:
             self.event_handler.log_movable_collides_against_wall(movement.moved_object)
             return MovementPossibility.from_movable(self.event_handler, movement.moved_object)
         new_coordinates = current_coordinates
