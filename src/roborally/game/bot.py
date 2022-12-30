@@ -16,7 +16,7 @@ class Bot(Movable):
         self.model.save()
 
     def to_data(self):
-        return {self.KEY_SYMBOL: str(self.model.order_number)}
+        return {self.KEY_SYMBOL: str(self.model.order_number), **self.coordinates.to_data()}
 
     @property
     def coordinates(self):

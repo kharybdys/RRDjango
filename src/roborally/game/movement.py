@@ -65,3 +65,7 @@ class MovementPossibility:
             return MovementPossibility.from_movable(self.event_handler, self.movable)
         else:
             return self
+
+    def process(self):
+        if not self.is_noop():
+            self.movable.update_coordinates_and_direction(self.new_coordinates, self.new_direction)
