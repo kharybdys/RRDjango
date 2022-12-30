@@ -653,11 +653,17 @@ class Roborally {
         });
         const walls = new fabric.Group(wall_elements, {my_type : 'WALL'});
         this.board_canvas.add(walls);
-        this.board_data.flags.forEach((flag) => {
-            this._draw_flag(flag)
-        });
-        this.board_data.bots.forEach((bot) => {
-            this._draw_bot(bot)
+        this.board_data.movables.forEach((movable) => {
+            switch(movable.movable_type) {
+                case 'Flag':
+                    this._draw_flag(movable)
+                    break;
+                case 'Bot':
+                    this._draw_bot(movable)
+                    break;
+                default:
+                    console.error('Unsupported movable_type ' + movable.movable_type);
+            }
         });
     }
 }

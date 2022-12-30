@@ -26,31 +26,19 @@ class Scenario(SerializationMixin):
         self.elements: dict[Point, basic.BasicElement] = {}
         self.walls: dict[Point, set[Direction]] = defaultdict(set)
         self.lasers: dict[tuple[Point, Direction], Laser] = {}
-        self.flags: list[Flag] = []
-        self.bots: list[Bot] = []
+        self.movables: list[Movable] = []
         for loader in scenario_data_provider.get_loader_for_boards():
             self._add_board(loader)
 
         self._determine_size()
         if load_flags:
             for flag in scenario_data_provider.flags:
-                self.add_flag(Flag(flag))
+                self.add_movable(Flag(flag))
         self._fill_neighbours()
         self._validate()
 
-    def add_flag(self, flag: Flag):
-        self.flags.append(flag)
-
-    def add_bot(self, bot: Bot):
-        self.bots.append(bot)
-
     def add_movable(self, movable: Movable):
-        if isinstance(movable, Bot):
-            self.add_bot(movable)
-        elif isinstance(movable, Flag):
-            self.add_flag(movable)
-        else:
-            raise ValueError(f"Unsupported type of movable: {movable}")
+        self.movables.append(movable)
 
     @staticmethod
     def _generate_laser_path(start: Point, end: Point) -> list[Point]:
@@ -110,8 +98,7 @@ class Scenario(SerializationMixin):
                       'elements': [],
                       'walls': [],
                       'lasers': [],
-                      'flags': [],
-                      'bots': []
+                      'movables': []
                       }
 
         for coordinates, element in sorted(self.elements.items()):  # PyCharm can't see this is an Iterable
@@ -133,29 +120,24 @@ class Scenario(SerializationMixin):
                 map(lambda p: p.to_data(), self._generate_laser_path(coordinates, laser_end)))
             board_data['lasers'].append(laser_data)
 
-        for flag in self.flags:
-            flag_data = flag.to_data()
-            board_data['flags'].append(flag_data)
-
-        for coordinates, bot in self.bots:
-            bot_data = bot.to_data()
-            board_data['bots'].append(bot_data)
+        for movable in self.movables:
+            board_data['movables'].append(movable.to_data())
 
         return board_data
 
-    def _bot_at_coords(self, coordinates) -> Movable | None:
-        return next(filter(lambda b: b.PUSHABLE and b.coordinates == coordinates, self.bots), None)
+    def _pushable_at_coords(self, coordinates) -> Movable | None:
+        return next(filter(lambda b: b.PUSHABLE and b.coordinates == coordinates, self.movables), None)
 
-    def determine_laser_end(self, coordinates: Point, direction: Direction, ignore_bots: bool) -> Point:
+    def determine_laser_end(self, coordinates: Point, direction: Direction, ignore_pushables: bool) -> Point:
         # TODO: Also ignore originating bot
-        if direction in self.walls[coordinates] or (not ignore_bots and self._bot_at_coords(coordinates)):
+        if direction in self.walls[coordinates] or (not ignore_pushables and self._pushable_at_coords(coordinates)):
             return coordinates
         else:
             new_coordinates = coordinates.neighbour(direction)
             if roborally.game.direction.get_to_direction(direction, 2) in self.walls[new_coordinates]:
                 return coordinates
             else:
-                return self.determine_laser_end(new_coordinates, direction, ignore_bots)
+                return self.determine_laser_end(new_coordinates, direction, ignore_pushables)
 
     def _process_movement(self, movement: Movement, ignore_movable_collision: bool = False) -> MovementPossibility:
         current_coordinates = movement.moved_object.coordinates
@@ -165,7 +147,7 @@ class Scenario(SerializationMixin):
         new_coordinates = current_coordinates
         for _ in range(0, movement.steps):
             new_coordinates = new_coordinates.neighbour(movement.direction)
-        if not ignore_movable_collision and movement.moved_object.PUSHES and new_coordinates != movement.moved_object.coordinates and (pushed := self._bot_at_coords(new_coordinates)):
+        if not ignore_movable_collision and movement.moved_object.PUSHES and new_coordinates != movement.moved_object.coordinates and (pushed := self._pushable_at_coords(new_coordinates)):
             # TODO: This is too simplistic, pushing (if movement_type is robot) is missing
             self.event_handler.log_movable_collides_against_movable(movement.moved_object, pushed)
             return MovementPossibility.from_movable(self.event_handler, movement.moved_object)
@@ -196,7 +178,7 @@ class Scenario(SerializationMixin):
         for current_board_movement_type in board_movement_order:
             # Build list of movement possibilities
             possible_movements: list[MovementPossibility] = []
-            for movable in [*self.flags, *self.bots]:
+            for movable in self.movables:
                 board_element = self.elements[movable.coordinates]
                 if isinstance(board_element, current_board_movement_type):
                     movement = board_element.board_movements(phase, movable)
@@ -215,7 +197,7 @@ class Scenario(SerializationMixin):
 
     def process_robot_movements(self, round: int, phase: int) -> None:
         movements: list[Movement] = []
-        for bot in self.bots:
-            movements.extend(bot.get_movements_for(round, phase))
+        for movable in self.movables:
+            movements.extend(movable.get_movements_for(round, phase))
         for movement in sorted(movements, key=lambda m: m.priority):
             self.process_movement(movement)

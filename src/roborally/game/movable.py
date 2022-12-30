@@ -9,6 +9,7 @@ class Movable(ABC, SerializationMixin):
     PUSHABLE = True
     PUSHES = True
     HAS_DIRECTION = True
+    KEY_TYPE = "movable_type"
 
     def __init__(self):
         self.died_this_turn = False
