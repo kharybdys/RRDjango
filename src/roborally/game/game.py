@@ -31,17 +31,17 @@ class Game:
         for bot in bots:
             self.scenario.add_bot(Bot(bot))
 
-    def process_phase(self, phase: int):
-        self.process_robot_movements(phase)
-        self.process_board_movements(phase)
+    def process_phase(self):
+        self.process_robot_movements()
+        self.process_board_movements()
         self.process_laser_shots()
         self.increase_phase()
 
-    def process_board_movements(self, phase: int):
-        self.scenario.process_board_movements(phase)
+    def process_board_movements(self):
+        self.scenario.process_board_movements(self.phase)
 
-    def process_robot_movements(self, phase: int):
-        pass
+    def process_robot_movements(self):
+        self.scenario.process_robot_movements(self.model.round, self.phase)
 
     def process_laser_shots(self):
         pass

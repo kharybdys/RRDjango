@@ -1,6 +1,7 @@
 from roborally.board.basic import Point
 from roborally.game.movable import Movable
 from roborally.game.direction import Direction
+from roborally.game.movement import Movement
 from roborally.models import ScenarioFlag
 
 
@@ -32,3 +33,6 @@ class Flag(Movable):
     @property
     def order_number(self):
         return self.model.order_number
+
+    def get_movements_for(self, round: int, phase: int) -> list[Movement]:
+        return []

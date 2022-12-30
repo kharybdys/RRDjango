@@ -205,6 +205,13 @@ class Bot(models.Model):
     def __str__(self):
         return f'{self.order_number}@{self.game.name}[{self.id}] for {self.user.username}'
 
+    def get_movements_for(self, round, phase, movable) -> list[Movement]:
+        return [movement
+                for card
+                in self.movementcard_set.filter(round=round, phase=phase, status__in=['FINAL', 'LOCKED'])
+                for movement
+                in Movement.from_card_definition(movable, CardDefinition(card.card_definition))]
+
 
 class History(models.Model):
     round = models.IntegerField(default=0)

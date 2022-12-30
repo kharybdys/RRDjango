@@ -230,3 +230,10 @@ class Scenario(SerializationMixin):
             # Now execute these movements if they aren't no-op
             for move in filter(lambda m: not m.is_noop(), possible_movements):
                 self.update_movable_coordinates_and_direction(move)
+
+    def process_robot_movements(self, round: int, phase: int) -> None:
+        movements: list[Movement] = []
+        for bot in self.bots.values():
+            movements.extend(bot.get_movements_for(round, phase))
+        for movement in sorted(movements, key=lambda m: m.priority):
+            self.process_movement(movement)

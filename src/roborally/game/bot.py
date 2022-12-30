@@ -1,6 +1,7 @@
 from roborally.board.basic import Point
 from roborally.game.movable import Movable
 from roborally.game.direction import Direction
+from roborally.game.movement import Movement
 from roborally.models import Bot as BotModel
 
 
@@ -37,3 +38,6 @@ class Bot(Movable):
     @property
     def damage(self):
         return self.model.damage
+
+    def get_movements_for(self, round: int, phase: int) -> list[Movement]:
+        return self.model.get_movements_for(round=round, phase=phase, movable=self)
