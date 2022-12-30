@@ -34,3 +34,7 @@ class Movable(ABC, SerializationMixin):
     @abstractmethod
     def update_coordinates_and_direction(self, new_coordinates: Point, new_direction: Direction):
         pass
+
+    @abstractmethod
+    def get_movements_for(self, round: int, phase: int) -> list["Movement"]:
+        pass

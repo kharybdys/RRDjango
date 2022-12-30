@@ -3,6 +3,8 @@ from django.db import models
 
 from roborally.game.direction import Direction
 from roborally.game.card import CardDefinition
+from roborally.game.events import EventType, PublishMixin
+from roborally.game.movement import Movement
 
 
 class ScenarioName(models.TextChoices):
@@ -91,19 +93,6 @@ class CardStatus(models.TextChoices):
     FLYWHEEL = 'FLYWHEEL'
 
 
-class EventType(models.TextChoices):
-    BOT_PUSHES = 'BOT_PUSHES'
-    CONVEYORBELT_STALL = 'CONVEYORBELT_STALL'
-    BOT_SHOOTS = 'BOT_SHOOTS'
-    BOARD_SHOOTS = 'BOARD_SHOOTS'
-    BOT_DIES_DAMAGE = 'BOT_DIES_DAMAGE'
-    BOT_DIES_HOLE = 'BOT_DIES_HOLE'
-    ARCHIVE_MARKER_MOVED = 'ARCHIVE_MARKER_MOVED'
-    POWER_DOWN = 'POWER_DOWN'
-    BOT_HITS_WALL = 'BOT_HITS_WALL'
-    BOT_HITS_UNMOVABLE_BOT = 'BOT_HITS_UNMOVABLE_BOT'
-
-
 class ScenarioBoard(models.Model):
     name = models.CharField(choices=ScenarioName.choices,
                             max_length=50)
@@ -149,7 +138,7 @@ class Binary(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
 
-class Game(models.Model):
+class Game(models.Model, PublishMixin):
     name = models.CharField(max_length=250, unique=True)
     scenario_name = models.CharField(choices=ScenarioName.choices, max_length=250)
     current_round = models.IntegerField(default=0)
@@ -239,7 +228,7 @@ class Event(models.Model):
     victim = models.ForeignKey(Bot,
                                on_delete=models.CASCADE,
                                related_name='event_victims_set')  # TODO: Decide on cascade
-    type = models.CharField(choices=EventType.choices,
+    type = models.CharField(choices=EventType.get_choices(),
                             max_length=32
                             )
     extra = models.CharField(max_length=2500)

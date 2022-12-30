@@ -8,7 +8,7 @@ from roborally.board.element.pusher import Pusher
 from roborally.board.element.rotator import Rotator
 from roborally.board.laser import Laser
 from roborally.board.data.loader import BoardLoader, ScenarioDataProvider
-from roborally.game.basic import Movable
+from roborally.game.movable import Movable
 from roborally.game.direction import Direction
 from roborally.game.bot import Bot
 from roborally.game.events import EventHandler

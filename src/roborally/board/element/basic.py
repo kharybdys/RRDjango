@@ -1,6 +1,6 @@
 from typing import Self
 
-from roborally.game.basic import Movable
+from roborally.game.movable import Movable
 from roborally.game.direction import Direction
 from roborally.game.movement import Movement
 from roborally.utils.codec import SerializationMixin

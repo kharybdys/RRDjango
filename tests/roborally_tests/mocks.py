@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 
-from roborally.board.basic import Point
-from roborally.game.basic import Movable
+from roborally.game.card import CardDefinition
+from roborally.game.movable import Movable
 from roborally.game.direction import Direction
 
 

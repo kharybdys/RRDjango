@@ -1,8 +1,7 @@
 from dataclasses import dataclass, field
 
-from roborally.game.basic import Movable
-from roborally.game.events import EventHandler
-from roborally.models import EventType
+from roborally.game.movable import Movable
+from roborally.game.events import EventHandler, EventType
 
 
 @dataclass
@@ -17,7 +16,7 @@ class ExpectedEvent:
 
     @staticmethod
     def create_one(event_type: EventType, phase: int, actor: Movable | None, victim: Movable | None, **kwargs):
-        return ExpectedEvent(event_type=str(event_type),
+        return ExpectedEvent(event_type=event_type.value,
                              phase=phase,
                              actor_type=actor.__class__.__name__ if actor else None,
                              actor_order_nr=actor.order_number if actor else None,

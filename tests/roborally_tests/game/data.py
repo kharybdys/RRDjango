@@ -1,4 +1,4 @@
-from roborally.game.basic import Movable
+from roborally.game.movable import Movable
 from roborally.game.bot import Bot
 
 from roborally.game.direction import to_optional_direction, Direction

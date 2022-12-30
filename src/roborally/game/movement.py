@@ -2,8 +2,7 @@ from dataclasses import dataclass
 from typing import Self, Optional
 
 from roborally.board.basic import Point
-from roborally.game.basic import Movable
-from roborally.game.bot import Bot
+from roborally.game.movable import Movable
 from roborally.game.card import CardDefinition
 from roborally.game.direction import Direction
 from roborally.game.events import EventHandler
@@ -27,8 +26,8 @@ class Movement:
         self.validate()
 
     @classmethod
-    def from_card_definition(cls, bot: Bot, card_definition: CardDefinition) -> list[Self]:
-        direction = bot.facing_direction
+    def from_card_definition(cls, movable: Movable, card_definition: CardDefinition) -> list[Self]:
+        direction = movable.facing_direction
         card_type = card_definition.get_type()
         priority = card_definition.get_priority()
         steps = card_type.get_steps()
@@ -39,7 +38,7 @@ class Movement:
             steps = -steps
         actual_steps = 0 if steps == 0 else 1
         # Manipulation to split into multiple movement objects if necessary
-        return [cls(direction, actual_steps, turns, priority, TYPE_ROBOT, bot) for _ in range(0, min(steps, 1))]
+        return [cls(direction, actual_steps, turns, priority, TYPE_ROBOT, movable) for _ in range(0, max(steps, 1))]
 
     def validate(self):
         assert self.steps == 0 or self.steps == 1

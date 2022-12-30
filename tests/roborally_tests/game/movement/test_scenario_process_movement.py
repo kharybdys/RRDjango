@@ -5,7 +5,7 @@ import pytest
 
 from roborally.board.scenario import Scenario
 from roborally.game.movement import Movement
-from roborally.game.basic import Movable
+from roborally.game.movable import Movable
 from roborally_tests.game.data import to_movable_movement_and_expectation
 from roborally_tests.game.events import TestEventHandler, ExpectedEvent
 from roborally_tests.mocks import Expectation

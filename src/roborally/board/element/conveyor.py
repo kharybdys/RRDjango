@@ -3,7 +3,7 @@ from abc import ABCMeta
 import roborally.game.direction
 from roborally.board.element.basic import BasicElement
 from roborally.game import movement
-from roborally.game.basic import Movable
+from roborally.game.movable import Movable
 from roborally.game.direction import Direction
 
 

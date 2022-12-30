@@ -1,5 +1,5 @@
 from roborally.board.basic import Point
-from roborally.game.basic import Movable
+from roborally.game.movable import Movable
 from roborally.game.direction import Direction
 from roborally.models import Bot as BotModel
 
