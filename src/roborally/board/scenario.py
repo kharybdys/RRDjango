@@ -98,6 +98,9 @@ class Scenario(SerializationMixin):
                     current_element.neighbours_completed()
 
     def _validate(self):
+        # TODO: Max 1 of each starting element
+        # TODO: Every pusher must have a wall "behind" it?
+        # TODO: Every laser must have a wall "behind" it
         pass
 
     def to_data(self) -> dict:
