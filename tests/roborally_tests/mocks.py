@@ -32,6 +32,5 @@ class Expectation(CoordinatesWithDirection):
     def verify(self):
         assert self.movable.coordinates.x == self.x_coordinate
         assert self.movable.coordinates.y == self.y_coordinate
-        # TODO: Shouldn't depend on PUSHES
-        if self.movable.HAS_DIRECTION:
+        if self.movable.HAS_DIRECTION and self.facing_direction:
             assert self.movable.facing_direction == self.facing_direction
