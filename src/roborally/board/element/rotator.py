@@ -16,7 +16,7 @@ class Rotator(BasicElement, metaclass=ABCMeta):
                                  steps=0,
                                  turns=self.turns,
                                  priority=0,
-                                 movement_type=movement.TYPE_ROTATOR,
+                                 can_push=False,
                                  moved_object=movable)
 
 

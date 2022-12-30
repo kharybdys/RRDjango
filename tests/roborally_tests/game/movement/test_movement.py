@@ -13,7 +13,7 @@ def test_create_movement_steps():
                      turns=0,
                      priority=0,
                      direction=Direction.SOUTH,
-                     movement_type="ROBOT",
+                     can_push=True,
                      moved_object=to_bot(0, 0, Direction.NORTH))
 
 
@@ -23,5 +23,5 @@ def test_create_movement_steps_has_direction():
                  turns=0,
                  priority=0,
                  direction=None,
-                 movement_type="ROBOT",
+                 can_push=True,
                  moved_object=to_bot(0, 0, Direction.NORTH))

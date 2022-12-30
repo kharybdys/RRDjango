@@ -7,21 +7,15 @@ from roborally.game.card import CardDefinition
 from roborally.game.direction import Direction
 from roborally.game.events import EventHandler
 
-TYPE_ROBOT = 'ROBOT'
-TYPE_DUAL_CONVEYOR = 'DUAL_CONVEYOR'
-TYPE_SINGLE_CONVEYOR = 'SINGLE_CONVEYOR'
-TYPE_PUSHER = 'PUSHER'
-TYPE_ROTATOR = 'ROTATOR'
-
 
 class Movement:
 
-    def __init__(self, direction: Optional[Direction], steps: int, turns: int, priority: int, movement_type: str, moved_object: Movable):
+    def __init__(self, direction: Optional[Direction], steps: int, turns: int, priority: int, can_push: bool, moved_object: Movable):
         self.direction = direction
         self.steps = steps
         self.turns = turns
         self.priority = priority
-        self.type = movement_type
+        self.can_push = can_push
         self.moved_object = moved_object
         self.validate()
 
@@ -38,7 +32,7 @@ class Movement:
             steps = -steps
         actual_steps = 0 if steps == 0 else 1
         # Manipulation to split into multiple movement objects if necessary
-        return [cls(direction, actual_steps, turns, priority, TYPE_ROBOT, movable) for _ in range(0, max(steps, 1))]
+        return [cls(direction, actual_steps, turns, priority, True, movable) for _ in range(0, max(steps, 1))]
 
     def validate(self):
         assert self.steps == 0 or self.steps == 1

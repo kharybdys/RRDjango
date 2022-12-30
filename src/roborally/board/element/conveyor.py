@@ -37,7 +37,7 @@ class Conveyor(BasicElement, metaclass=ABCMeta):
                                  steps=1,
                                  turns=self.end_direction.turns_to(neighbour.end_direction),
                                  priority=0,
-                                 movement_type=movement.TYPE_SINGLE_CONVEYOR,
+                                 can_push=False,
                                  moved_object=movable)
 
 

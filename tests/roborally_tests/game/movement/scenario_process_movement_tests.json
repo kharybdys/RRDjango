@@ -17,7 +17,7 @@
         "steps": 0,
         "turns": 1,
         "priority": 80,
-        "movement_type": "ROBOT"
+        "can_push": true
       }
     }]
   },
@@ -37,7 +37,7 @@
         "steps": 1,
         "turns": 0,
         "priority": 80,
-        "movement_type": "ROBOT"
+        "can_push": false
       }
     }]
   },
@@ -54,7 +54,7 @@
         "steps": 1,
         "turns": 0,
         "priority": 80,
-        "movement_type": "ROBOT"
+        "can_push": true
       }
     }],
     "expected_events": [{
