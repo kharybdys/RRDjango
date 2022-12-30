@@ -1,0 +1,258 @@
+[
+  {
+    "test_id": "Bot Move3 East No block",
+    "movables": [{
+      "type": "Bot",
+      "x_coordinate": 1,
+      "y_coordinate": 0,
+      "order_number": 1,
+      "facing_direction": "EAST",
+      "expectation": {
+        "x_coordinate": 4,
+        "y_coordinate": 0,
+        "facing_direction": "EAST"
+      },
+      "movement_cards": [{
+        "round": 1,
+        "phase": 1,
+        "status": "FINAL",
+        "card_definition": "MC_840"
+      }]
+    }]
+  },
+  {
+    "test_id": "Bot Move3 East No block - 2",
+    "movables": [{
+      "type": "Bot",
+      "x_coordinate": 0,
+      "y_coordinate": 1,
+      "order_number": 1,
+      "facing_direction": "EAST",
+      "expectation": {
+        "x_coordinate": 3,
+        "y_coordinate": 1,
+        "facing_direction": "EAST"
+      },
+      "movement_cards": [{
+        "round": 1,
+        "phase": 1,
+        "status": "FINAL",
+        "card_definition": "MC_840"
+      }]
+    }]
+  },
+  {
+    "test_id": "Bot Move3 East Wall",
+    "movables": [{
+      "type": "Bot",
+      "x_coordinate": 1,
+      "y_coordinate": 1,
+      "order_number": 1,
+      "facing_direction": "EAST",
+      "expectation": {
+        "x_coordinate": 3,
+        "y_coordinate": 1,
+        "facing_direction": "EAST"
+      },
+      "movement_cards": [{
+        "round": 1,
+        "phase": 1,
+        "status": "FINAL",
+        "card_definition": "MC_840"
+      }]
+    }],
+    "expected_events": [{
+      "event_type": "BOT_HITS_WALL",
+      "phase": 1,
+      "actor_type": "Bot",
+      "actor_order_nr": 1
+    }]
+  },
+  {
+    "test_id": "Bot Move3 East No block - 3",
+    "movables": [{
+      "type": "Bot",
+      "x_coordinate": 0,
+      "y_coordinate": 4,
+      "order_number": 1,
+      "facing_direction": "EAST",
+      "expectation": {
+        "x_coordinate": 3,
+        "y_coordinate": 4,
+        "facing_direction": "EAST"
+      },
+      "movement_cards": [{
+        "round": 1,
+        "phase": 1,
+        "status": "FINAL",
+        "card_definition": "MC_840"
+      }]
+    }]
+  },
+  {
+    "test_id": "Bot Move3 East Hole",
+    "movables": [{
+      "type": "Bot",
+      "x_coordinate": 1,
+      "y_coordinate": 4,
+      "order_number": 1,
+      "facing_direction": "EAST",
+      "movement_cards": [{
+        "round": 1,
+        "phase": 1,
+        "status": "FINAL",
+        "card_definition": "MC_840"
+      }]
+    }],
+    "expected_events": [{
+      "event_type": "BOT_DIES_HOLE",
+      "phase": 1,
+      "actor_type": "Bot",
+      "actor_order_nr": 1
+    }]
+  },
+  {
+    "test_id": "Bot Move3 South No block",
+    "movables": [{
+      "type": "Bot",
+      "x_coordinate": 1,
+      "y_coordinate": 0,
+      "order_number": 1,
+      "facing_direction": "SOUTH",
+      "expectation": {
+        "x_coordinate": 1,
+        "y_coordinate": 3,
+        "facing_direction": "SOUTH"
+      },
+      "movement_cards": [{
+        "round": 1,
+        "phase": 1,
+        "status": "FINAL",
+        "card_definition": "MC_840"
+      }]
+    }]
+  },
+  {
+    "test_id": "Bot Move3 South Wall",
+    "movables": [{
+      "type": "Bot",
+      "x_coordinate": 1,
+      "y_coordinate": 1,
+      "order_number": 1,
+      "facing_direction": "SOUTH",
+      "expectation": {
+        "x_coordinate": 1,
+        "y_coordinate": 3,
+        "facing_direction": "SOUTH"
+      },
+      "movement_cards": [{
+        "round": 1,
+        "phase": 1,
+        "status": "FINAL",
+        "card_definition": "MC_840"
+      }]
+    }],
+    "expected_events": [{
+      "event_type": "BOT_HITS_WALL",
+      "phase": 1,
+      "actor_type": "Bot",
+      "actor_order_nr": 1
+    }]
+  },
+  {
+    "test_id": "Bot Move3 West No block",
+    "movables": [{
+      "type": "Bot",
+      "x_coordinate": 7,
+      "y_coordinate": 1,
+      "order_number": 1,
+      "facing_direction": "WEST",
+      "expectation": {
+        "x_coordinate": 4,
+        "y_coordinate": 1,
+        "facing_direction": "WEST"
+      },
+      "movement_cards": [{
+        "round": 1,
+        "phase": 1,
+        "status": "FINAL",
+        "card_definition": "MC_840"
+      }]
+    }]
+  },
+  {
+    "test_id": "Bot Move3 West Wall",
+    "movables": [{
+      "type": "Bot",
+      "x_coordinate": 6,
+      "y_coordinate": 1,
+      "order_number": 1,
+      "facing_direction": "WEST",
+      "expectation": {
+        "x_coordinate": 4,
+        "y_coordinate": 1,
+        "facing_direction": "WEST"
+      },
+      "movement_cards": [{
+        "round": 1,
+        "phase": 1,
+        "status": "FINAL",
+        "card_definition": "MC_840"
+      }]
+    }],
+    "expected_events": [{
+      "event_type": "BOT_HITS_WALL",
+      "phase": 1,
+      "actor_type": "Bot",
+      "actor_order_nr": 1
+    }]
+  },
+  {
+    "test_id": "Bot Move3 North No block",
+    "movables": [{
+      "type": "Bot",
+      "x_coordinate": 1,
+      "y_coordinate": 7,
+      "order_number": 1,
+      "facing_direction": "NORTH",
+      "expectation": {
+        "x_coordinate": 1,
+        "y_coordinate": 4,
+        "facing_direction": "NORTH"
+      },
+      "movement_cards": [{
+        "round": 1,
+        "phase": 1,
+        "status": "FINAL",
+        "card_definition": "MC_840"
+      }]
+    }]
+  },
+  {
+    "test_id": "Bot Move3 North Wall",
+    "movables": [{
+      "type": "Bot",
+      "x_coordinate": 1,
+      "y_coordinate": 6,
+      "order_number": 1,
+      "facing_direction": "NORTH",
+      "expectation": {
+        "x_coordinate": 1,
+        "y_coordinate": 4,
+        "facing_direction": "NORTH"
+      },
+      "movement_cards": [{
+        "round": 1,
+        "phase": 1,
+        "status": "FINAL",
+        "card_definition": "MC_840"
+      }]
+    }],
+    "expected_events": [{
+      "event_type": "BOT_HITS_WALL",
+      "phase": 1,
+      "actor_type": "Bot",
+      "actor_order_nr": 1
+    }]
+  }
+]
