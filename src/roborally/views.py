@@ -4,7 +4,6 @@ from django.utils.decorators import method_decorator
 from django.views import generic
 
 from roborally.board.data.data_django import DjangoScenarioDataProvider
-from roborally.game.events import DummyEventHandler
 from roborally.models import Game, History, Bot
 from roborally.forms import GameForm
 from roborally.board.scenario import Scenario
@@ -17,7 +16,7 @@ class CanvasView(generic.TemplateView):
     def get_context_data(self, **kwargs):
         context = super().get_context_data(**kwargs)
         scenario_data_provider = DjangoScenarioDataProvider(kwargs["scenario_name"].upper())
-        board_data = Scenario(scenario_data_provider, DummyEventHandler(), True).to_data()
+        board_data = Scenario(scenario_data_provider, True).to_data()
         context['board'] = board_data
         return context
 

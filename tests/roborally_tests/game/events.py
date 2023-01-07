@@ -1,7 +1,7 @@
 from dataclasses import dataclass, field
 
+from roborally.game.events import EventType
 from roborally.game.movable import Movable
-from roborally.game.events import EventHandler, EventType
 
 
 @dataclass
@@ -15,27 +15,27 @@ class ExpectedEvent:
     extra: dict = field(default_factory=dict)
 
     @staticmethod
-    def create_one(event_type: EventType, phase: int, actor: Movable | None, victim: Movable | None, **kwargs):
+    def create_one(event_type: EventType, phase: int, registrar: "MovableModelMock", other: "MovableModelMock", **kwargs):
         return ExpectedEvent(event_type=event_type.value,
                              phase=phase,
-                             actor_type=actor.__class__.__name__ if actor else None,
-                             actor_order_nr=actor.order_number if actor else None,
-                             victim_type=actor.__class__.__name__ if victim else None,
-                             victim_order_nr=victim.order_number if victim else None,
+                             actor_type=registrar.type,
+                             actor_order_nr=registrar.order_number,
+                             victim_type=registrar.type if other else None,
+                             victim_order_nr=other.order_number if other else None,
                              extra=kwargs)
         pass
 
 
-class TestEventHandler(EventHandler):
+# TODO: Another circular import problem due to type checking
+class EventChecker:
     def __init__(self):
-        super().__init__(None)
         self.expected_events: list[ExpectedEvent] = []
 
     def add_expected_event(self, expected_event: ExpectedEvent):
         self.expected_events.append(expected_event)
 
-    def _log_event(self, event_type: EventType, actor: Movable = None, victim: Movable = None, **kwargs):
-        expected_event = ExpectedEvent.create_one(event_type, self.phase, actor, victim, **kwargs)
+    def log_event(self, phase: int, event_type: EventType, registrar: "MovableModelMock", other: Movable = None, **kwargs):
+        expected_event = ExpectedEvent.create_one(event_type, phase, registrar, other.model if other else None, **kwargs)
         # Throws ValueError if not found which is what we want for the test
         self.expected_events.remove(expected_event)
 

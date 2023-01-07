@@ -1,9 +1,10 @@
 from dataclasses import dataclass, field
 
 from roborally.game.card import CardDefinition
+from roborally.game.events import EventType
 from roborally.game.movable import Movable
 from roborally.game.direction import Direction
-from roborally.game.movement import Movement
+from roborally_tests.game.events import EventChecker
 
 
 @dataclass
@@ -27,21 +28,24 @@ class CoordinatesWithDirection(Coordinates):
 
 @dataclass
 class MovableModelMock(CoordinatesWithDirection):
+    event_checker: EventChecker
+    type: str
     order_number: int = 0
     movement_cards: list[MovementCardMock] = field(default_factory=list)
 
     def save(self):
         pass
 
+    def log_event(self, phase: int, event_type: EventType, other: Movable = None, **kwargs):
+        self.event_checker.log_event(phase, event_type, self, other, **kwargs)
+
     def add_card(self, round, phase, status, card_definition):
         self.movement_cards.append(MovementCardMock(round, phase, status, card_definition))
 
-    def get_movements_for(self, round, phase, movable) -> list[Movement]:
-        return [movement
+    def get_cards_for(self, round, phase) -> list[CardDefinition]:
+        return [CardDefinition(card.card_definition)
                 for card
-                in filter(lambda c: c.round == round and c.phase == phase and c.status in ['FINAL', 'LOCKED'], self.movement_cards)
-                for movement
-                in Movement.from_card_definition(movable, CardDefinition(card.card_definition))]
+                in filter(lambda c: c.round == round and c.phase == phase and c.status in ['FINAL', 'LOCKED'], self.movement_cards)]
 
 
 @dataclass

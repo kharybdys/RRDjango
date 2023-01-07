@@ -2,7 +2,7 @@ import pytest
 
 from roborally.game.direction import Direction
 from roborally.game.movement import Movement
-from roborally_tests.game.data import to_bot
+from roborally_tests.game.data import to_dummy_movable
 
 
 def test_create_movement_steps():
@@ -14,7 +14,8 @@ def test_create_movement_steps():
                      priority=0,
                      direction=Direction.SOUTH,
                      can_push=True,
-                     moved_object=to_bot(0, 0, Direction.NORTH))
+                     phase=1,
+                     moved_object=to_dummy_movable(0, 0, Direction.NORTH))
 
 
 def test_create_movement_steps_has_direction():
@@ -24,4 +25,5 @@ def test_create_movement_steps_has_direction():
                  priority=0,
                  direction=None,
                  can_push=True,
-                 moved_object=to_bot(0, 0, Direction.NORTH))
+                 phase=1,
+                 moved_object=to_dummy_movable(0, 0, Direction.NORTH))

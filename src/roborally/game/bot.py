@@ -1,7 +1,8 @@
 from roborally.board.basic import Point
+from roborally.game.card import CardDefinition
+from roborally.game.events import EventType
 from roborally.game.movable import Movable
 from roborally.game.direction import Direction
-from roborally.game.movement import Movement
 from roborally.models import Bot as BotModel
 
 
@@ -23,6 +24,10 @@ class Bot(Movable):
         return Point(self.model.x_coordinate, self.model.y_coordinate)
 
     @property
+    def archive_coordinates(self):
+        return Point(self.model.archive_x_coordinate, self.model.archive_y_coordinate)
+
+    @property
     def facing_direction(self):
         return self.model.facing_direction
 
@@ -39,5 +44,18 @@ class Bot(Movable):
     def damage(self):
         return self.model.damage
 
-    def get_movements_for(self, round: int, phase: int) -> list[Movement]:
-        return self.model.get_movements_for(round=round, phase=phase, movable=self)
+    def cleanup_killed_at_model(self):
+        self.model.damage = 2
+
+    def get_cards_for(self, round: int, phase: int) -> list[CardDefinition]:
+        return self.model.get_cards_for(round=round, phase=phase)
+
+    def take_damage(self, damage: int):
+        if self.model.damage + damage >= self.INITIAL_HEALTH:
+            pass
+
+    def _log_event(self, phase: int, event_type: EventType, other: Movable = None, **kwargs):
+        other_model = None
+        if other and isinstance(other, Bot):
+            other_model = other.model
+        self.model.log_event(phase, event_type, other_model, **kwargs)

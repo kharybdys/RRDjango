@@ -26,6 +26,7 @@ class Pusher(BasicElement, metaclass=ABCMeta):
                                      turns=0,
                                      priority=0,
                                      can_push=False,
+                                     phase=phase,
                                      moved_object=movable)
         else:
             return None

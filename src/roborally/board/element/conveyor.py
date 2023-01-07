@@ -38,6 +38,7 @@ class Conveyor(BasicElement, metaclass=ABCMeta):
                                  turns=self.end_direction.turns_to(neighbour.end_direction),
                                  priority=0,
                                  can_push=False,
+                                 phase=phase,
                                  moved_object=movable)
 
 

@@ -1,3 +1,5 @@
+from typing import Self
+
 from django.contrib.auth.models import User
 from django.db import models
 
@@ -154,16 +156,6 @@ class Game(models.Model, PublishMixin):
     def __str__(self):
         return f'{self.name}[{self.id}]'
 
-    def log_event(self, phase: int, event_type: EventType, actor=None, victim=None, **kwargs):
-        event = self.event_set.create(round=self.current_round,
-                                      phase=phase,
-                                      event_type=event_type,
-                                      actor=actor,
-                                      victim=victim,
-                                      extra=kwargs)
-        event.save()
-
-
 class Flag(models.Model):
     x_coordinate = models.IntegerField(default=-1)
     y_coordinate = models.IntegerField(default=-1)
@@ -205,17 +197,23 @@ class Bot(models.Model):
     def __str__(self):
         return f'{self.order_number}@{self.game.name}[{self.id}] for {self.user.username}'
 
-    def get_movements_for(self, round, phase, movable) -> list[Movement]:
-        return [movement
+    def get_cards_for(self, round, phase) -> list[CardDefinition]:
+        return [CardDefinition(card)
                 for card
-                in self.movementcard_set.filter(round=round, phase=phase, status__in=['FINAL', 'LOCKED'])
-                for movement
-                in Movement.from_card_definition(movable, CardDefinition(card.card_definition))]
+                in self.movementcard_set.filter(round=round, phase=phase, status__in=['FINAL', 'LOCKED'])]
+
+    def log_event(self, phase: int, event_type: EventType, other: Self = None, **kwargs):
+        event = self.event_registrar_set.create(round=self.game.current_round,
+                                                phase=phase,
+                                                event_type=event_type,
+                                                other=other,
+                                                extra=kwargs)
+        event.save()
 
 
 class History(models.Model):
     round = models.IntegerField(default=0)
-    phase = models.IntegerField(default=3)
+    phase = models.IntegerField(default=1)
     game = models.ForeignKey(Game, on_delete=models.CASCADE)  # TODO: Decide on cascade
     snapshot = models.OneToOneField(Binary, on_delete=models.CASCADE)  # TODO: Decide on cascade
     created_by = models.CharField(max_length=250, default='internal')
@@ -226,15 +224,14 @@ class History(models.Model):
 
 
 class Event(models.Model):
-    game = models.ForeignKey(Game, on_delete=models.CASCADE)  # TODO: Decide on cascade
     round = models.IntegerField(default=0)
-    phase = models.IntegerField(default=3)
-    actor = models.ForeignKey(Bot,
+    phase = models.IntegerField(default=1)
+    registrar = models.ForeignKey(Bot,
+                                  on_delete=models.CASCADE,
+                                  related_name='event_registrar_set')  # TODO: Decide on cascade
+    other = models.ForeignKey(Bot,
                               on_delete=models.CASCADE,
-                              related_name='event_actors_set')  # TODO: Decide on cascade
-    victim = models.ForeignKey(Bot,
-                               on_delete=models.CASCADE,
-                               related_name='event_victims_set')  # TODO: Decide on cascade
+                              related_name='event_other_set')  # TODO: Decide on cascade
     type = models.CharField(choices=EventType.get_choices(),
                             max_length=32
                             )
@@ -243,12 +240,12 @@ class Event(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
-        return f'{self.type}@{self.game.name}@{self.phase}/{self.round}[{self.id}]'
+        return f'{self.type}@{self.registrar.game.name}@{self.phase}/{self.round}[{self.id}]'
 
 
 class MovementCard(models.Model):
     round = models.IntegerField(default=0)
-    phase = models.IntegerField(default=3)
+    phase = models.IntegerField(default=1)
     status = models.CharField(choices=CardStatus.choices,
                               max_length=10,
                               default='INITIAL'

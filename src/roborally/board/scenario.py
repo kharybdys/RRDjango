@@ -10,8 +10,6 @@ from roborally.board.laser import Laser
 from roborally.board.data.loader import BoardLoader, ScenarioDataProvider
 from roborally.game.movable import Movable
 from roborally.game.direction import Direction
-from roborally.game.bot import Bot
-from roborally.game.events import EventHandler
 from roborally.game.flag import Flag
 from roborally.game.movement import Movement, MovementPossibility
 from roborally.utils.codec import SerializationMixin
@@ -19,8 +17,7 @@ from roborally.utils.codec import SerializationMixin
 
 class Scenario(SerializationMixin):
 
-    def __init__(self, scenario_data_provider: ScenarioDataProvider, event_handler: EventHandler, load_flags: bool = False):
-        self.event_handler = event_handler
+    def __init__(self, scenario_data_provider: ScenarioDataProvider, load_flags: bool = False):
         self.y_size = 0
         self.x_size = 0
         self.elements: dict[Point, basic.BasicElement] = {}
@@ -140,26 +137,26 @@ class Scenario(SerializationMixin):
                 return self.determine_laser_end(new_coordinates, direction, ignore_pushables)
 
     def _process_movement(self, movement: Movement, ignore_movable_collision: bool = False) -> MovementPossibility:
+        kills = False
         current_coordinates = movement.moved_object.coordinates
         if movement.direction in self.walls[current_coordinates] or movement.direction.turn(2) in self.walls[current_coordinates.neighbour(movement.direction)]:
-            self.event_handler.log_movable_collides_against_wall(movement.moved_object)
-            return MovementPossibility.from_movable(self.event_handler, movement.moved_object)
+            movement.moved_object.log_collides_against_wall(movement.phase)
+            return MovementPossibility.from_movable(movement.phase, movement.moved_object)
         new_coordinates = current_coordinates
         for _ in range(0, movement.steps):
             new_coordinates = new_coordinates.neighbour(movement.direction)
         if not ignore_movable_collision and movement.moved_object.PUSHES and new_coordinates != movement.moved_object.coordinates and (pushed := self._pushable_at_coords(new_coordinates)):
             # TODO: This is too simplistic, pushing (if movement_type is robot) is missing
-            self.event_handler.log_movable_collides_against_movable(movement.moved_object, pushed)
-            return MovementPossibility.from_movable(self.event_handler, movement.moved_object)
+            movement.moved_object.log_collides_against_movable(movement.phase, pushed)
+            return MovementPossibility.from_movable(movement.phase, movement.moved_object)
         if self.elements[current_coordinates].get_neighbour(movement.direction).KILLS:
-            # TODO: Handle movable being killed
-            self.event_handler.log_movable_killed_hole(movement.moved_object)
-            return MovementPossibility.from_movable(self.event_handler, movement.moved_object)
+            kills = True
         new_direction = movement.moved_object.facing_direction.turn(movement.turns)
-        return MovementPossibility(event_handler=self.event_handler,
+        return MovementPossibility(phase=movement.phase,
                                    movable=movement.moved_object,
                                    new_coordinates=new_coordinates,
-                                   new_direction=new_direction)
+                                   new_direction=new_direction,
+                                   kills=kills)
 
     def process_movement(self, movement: Movement):
         self._process_movement(movement).process()
@@ -185,9 +182,9 @@ class Scenario(SerializationMixin):
                     if movement:
                         possible_movements.append(self._process_movement(movement, ignore_movable_collision=True))
                     else:
-                        possible_movements.append(MovementPossibility.from_movable(self.event_handler, movable))
+                        possible_movements.append(MovementPossibility.from_movable(phase, movable))
                 else:
-                    possible_movements.append(MovementPossibility.from_movable(self.event_handler, movable))
+                    possible_movements.append(MovementPossibility.from_movable(phase, movable))
             # Repeatedly filter this list until no duplicate target coordinates remain
             while duplicated_coordinates := self._get_duplicated_target_coordinates(possible_movements):
                 possible_movements = list(map(lambda m: m.cancel_if_target_coord_matches(duplicated_coordinates), possible_movements))
@@ -198,6 +195,7 @@ class Scenario(SerializationMixin):
     def process_robot_movements(self, round: int, phase: int) -> None:
         movements: list[Movement] = []
         for movable in self.movables:
-            movements.extend(movable.get_movements_for(round, phase))
+            cards = movable.get_cards_for(round, phase)
+            movements.extend([movement for card in cards for movement in Movement.from_card_definition(movable, phase, card)])
         for movement in sorted(movements, key=lambda m: m.priority):
             self.process_movement(movement)
