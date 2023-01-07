@@ -1,5 +1,6 @@
 from abc import abstractmethod
 from enum import Enum
+from typing import Self
 
 
 class EventType(Enum):
@@ -19,16 +20,15 @@ class EventType(Enum):
         return [(key.value, key.name) for key in cls]
 
 
-# TODO: See if this circular import can be solved
 class PublishMixin:
     @abstractmethod
-    def _log_event(self, phase: int, event_type: EventType, other: "Movable" = None, **kwargs):
+    def _log_event(self, phase: int, event_type: EventType, other: Self = None, **kwargs):
         pass
 
     def log_collides_against_wall(self, phase: int):
         self._log_event(phase=phase, event_type=EventType.MOVABLE_HITS_WALL)
 
-    def log_collides_against_movable(self, phase: int, victim: "Movable"):
+    def log_collides_against_movable(self, phase: int, victim: Self):
         self._log_event(phase=phase, event_type=EventType.BOT_HITS_UNMOVABLE_BOT, other=victim)
 
     def log_killed_by_hole(self, phase: int):
