@@ -37,7 +37,12 @@ class MovableModelMock(CoordinatesWithDirection):
         pass
 
     def log_event(self, phase: int, event_type: EventType, other: Movable = None, **kwargs):
-        self.event_checker.log_event(phase, event_type, self, other, **kwargs)
+        other_type = None
+        other_order_nr = None
+        if other and isinstance(other.model, MovableModelMock):
+            other_type = other.model.type
+            other_order_nr = other.model.order_number
+        self.event_checker.log_event(phase, event_type, self.type, self.order_number, other_type, other_order_nr, **kwargs)
 
     def add_card(self, round, phase, status, card_definition):
         self.movement_cards.append(MovementCardMock(round, phase, status, card_definition))
