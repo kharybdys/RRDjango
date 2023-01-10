@@ -615,44 +615,44 @@
         {
           "x_coordinate": 0,
           "y_coordinate": 5,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "DUAL_CONVEYOR",
+          "direction": "EAST"
         },
         {
           "x_coordinate": 1,
           "y_coordinate": 5,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "DUAL_CONVEYOR",
+          "direction": "EAST"
         },
         {
           "x_coordinate": 2,
           "y_coordinate": 5,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "DUAL_CONVEYOR",
+          "direction": "SOUTH"
         },
         {
           "x_coordinate": 3,
           "y_coordinate": 5,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "DUAL_CONVEYOR",
+          "direction": "EAST"
         },
         {
           "x_coordinate": 4,
           "y_coordinate": 5,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "DUAL_CONVEYOR",
+          "direction": "SOUTH"
         },
         {
           "x_coordinate": 5,
           "y_coordinate": 5,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "SINGLE_CONVEYOR",
+          "direction": "EAST"
         },
         {
           "x_coordinate": 6,
           "y_coordinate": 5,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "SINGLE_CONVEYOR",
+          "direction": "SOUTH"
         },
         {
           "x_coordinate": 7,
@@ -735,7 +735,7 @@
         {
           "x_coordinate": 0,
           "y_coordinate": 6,
-          "element_type": "BASIC",
+          "element_type": "DUAL_CONVEYOR",
           "direction": "NORTH"
         },
         {
@@ -747,32 +747,32 @@
         {
           "x_coordinate": 2,
           "y_coordinate": 6,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "DUAL_CONVEYOR",
+          "direction": "SOUTH"
         },
         {
           "x_coordinate": 3,
           "y_coordinate": 6,
-          "element_type": "BASIC",
+          "element_type": "DUAL_CONVEYOR",
           "direction": "NORTH"
         },
         {
           "x_coordinate": 4,
           "y_coordinate": 6,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "DUAL_CONVEYOR",
+          "direction": "WEST"
         },
         {
           "x_coordinate": 5,
           "y_coordinate": 6,
-          "element_type": "BASIC",
+          "element_type": "SINGLE_CONVEYOR",
           "direction": "NORTH"
         },
         {
           "x_coordinate": 6,
           "y_coordinate": 6,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "SINGLE_CONVEYOR",
+          "direction": "WEST"
         },
         {
           "x_coordinate": 7,
@@ -855,44 +855,44 @@
         {
           "x_coordinate": 0,
           "y_coordinate": 7,
-          "element_type": "BASIC",
+          "element_type": "DUAL_CONVEYOR",
           "direction": "NORTH"
         },
         {
           "x_coordinate": 1,
           "y_coordinate": 7,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "DUAL_CONVEYOR",
+          "direction": "WEST"
         },
         {
           "x_coordinate": 2,
           "y_coordinate": 7,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "DUAL_CONVEYOR",
+          "direction": "WEST"
         },
         {
           "x_coordinate": 3,
           "y_coordinate": 7,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "SINGLE_CONVEYOR",
+          "direction": "EAST"
         },
         {
           "x_coordinate": 4,
           "y_coordinate": 7,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "SINGLE_CONVEYOR",
+          "direction": "EAST"
         },
         {
           "x_coordinate": 5,
           "y_coordinate": 7,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "SINGLE_CONVEYOR",
+          "direction": "EAST"
         },
         {
           "x_coordinate": 6,
           "y_coordinate": 7,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "PUSHER_135",
+          "direction": "SOUTH"
         },
         {
           "x_coordinate": 7,
@@ -981,37 +981,37 @@
         {
           "x_coordinate": 1,
           "y_coordinate": 8,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "SINGLE_CONVEYOR",
+          "direction": "SOUTH"
         },
         {
           "x_coordinate": 2,
           "y_coordinate": 8,
-          "element_type": "BASIC",
+          "element_type": "PUSHER_24",
           "direction": "NORTH"
         },
         {
           "x_coordinate": 3,
           "y_coordinate": 8,
-          "element_type": "BASIC",
+          "element_type": "PUSHER_24",
           "direction": "NORTH"
         },
         {
           "x_coordinate": 4,
           "y_coordinate": 8,
-          "element_type": "BASIC",
+          "element_type": "SINGLE_CONVEYOR",
           "direction": "NORTH"
         },
         {
           "x_coordinate": 5,
           "y_coordinate": 8,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "SINGLE_CONVEYOR",
+          "direction": "SOUTH"
         },
         {
           "x_coordinate": 6,
           "y_coordinate": 8,
-          "element_type": "BASIC",
+          "element_type": "ROTATOR_CLOCKWISE",
           "direction": "NORTH"
         },
         {
@@ -1095,20 +1095,20 @@
         {
           "x_coordinate": 0,
           "y_coordinate": 9,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "SINGLE_CONVEYOR",
+          "direction": "EAST"
         },
         {
           "x_coordinate": 1,
           "y_coordinate": 9,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "SINGLE_CONVEYOR",
+          "direction": "SOUTH"
         },
         {
           "x_coordinate": 2,
           "y_coordinate": 9,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "SINGLE_CONVEYOR",
+          "direction": "WEST"
         },
         {
           "x_coordinate": 3,
@@ -1125,7 +1125,7 @@
         {
           "x_coordinate": 5,
           "y_coordinate": 9,
-          "element_type": "BASIC",
+          "element_type": "SINGLE_CONVEYOR",
           "direction": "NORTH"
         },
         {
@@ -1221,133 +1221,13 @@
         {
           "x_coordinate": 1,
           "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
+          "element_type": "SINGLE_CONVEYOR",
+          "direction": "SOUTH"
         },
         {
           "x_coordinate": 2,
           "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 3,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 4,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 5,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 6,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 7,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 8,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 9,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 10,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 11,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 12,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 13,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 14,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 15,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 16,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 17,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 18,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 19,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 0,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 1,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
-          "direction": "NORTH"
-        },
-        {
-          "x_coordinate": 2,
-          "y_coordinate": 10,
-          "element_type": "BASIC",
+          "element_type": "ROTATOR_COUNTER_CLOCKWISE",
           "direction": "NORTH"
         },
         {
