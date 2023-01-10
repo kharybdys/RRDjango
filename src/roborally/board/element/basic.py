@@ -66,6 +66,3 @@ class HoleElement(BasicElement):
 
 class VoidElement(BasicElement):
     KILLS = True
-
-    def to_data(self):
-        raise Exception("Void elements cannot be serialized")

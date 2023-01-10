@@ -638,6 +638,9 @@ class Roborally {
                 case 'CounterClockwiseRotator':
                     this._draw_rotator_counter_clockwise(element);
                     break;
+                case 'VoidElement':
+                    // Don't draw void elements
+                    break;
                 default:
                     console.error('Unsupported element_type ' + element.element_type);
             }

@@ -28,8 +28,7 @@ class Scenario(SerializationMixin):
             self._add_board(loader)
 
         self._determine_size()
-        # TODO: Fill the "middle" bits of the board with void elements
-        #  that are specific for its coordinates so they are available for the fill neighbours step.
+        self._fill_with_void()
         if load_flags:
             for flag in scenario_data_provider.flags:
                 self.add_movable(Flag(flag))
@@ -72,6 +71,12 @@ class Scenario(SerializationMixin):
 
         self.x_size += 1
         self.y_size += 1
+
+    def _fill_with_void(self):
+        for x in range(0, self.x_size):
+            for y in range(0, self.y_size):
+                if Point(x, y) not in self.elements.keys():
+                    self.elements[Point(x, y)] = basic.VoidElement()
 
     def _fill_neighbours(self):
         void = basic.VoidElement()
