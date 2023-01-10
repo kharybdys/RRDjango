@@ -6,7 +6,6 @@ from django.db import models
 from roborally.game.direction import Direction
 from roborally.game.card import CardDefinition
 from roborally.game.events import EventType, PublishMixin
-from roborally.game.movement import Movement
 
 
 class ScenarioName(models.TextChoices):
