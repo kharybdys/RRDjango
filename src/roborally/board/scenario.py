@@ -86,6 +86,9 @@ class Scenario(SerializationMixin):
         # TODO: Max 1 of each starting element
         # TODO: Every pusher must have a wall "behind" it?
         # TODO: Every laser must have a wall "behind" it
+        # TODO: No duplicate coordinates for the board elements (not testable here)
+        # TODO: No duplicate coordinates for flags (or later).
+        # TODO: No duplicate coordinates for bots (later?)?
         pass
 
     def to_data(self) -> dict:
