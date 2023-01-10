@@ -1,0 +1,13 @@
+{% extends "roborally/index.html" %}
+
+{% block content %}
+    <div id="scenario_preview">
+    {%  include "roborally/canvas.html" %}
+    </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const roborally = new Roborally(JSON.parse(document.getElementById('board_data').textContent), 'board');
+            roborally.draw_canvas();
+        });
+    </script>
+{% endblock content %}

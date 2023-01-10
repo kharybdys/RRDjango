@@ -1,16 +1,31 @@
+from os import path
+
 from django.contrib.auth.decorators import login_required
 from django.urls import reverse
 from django.utils.decorators import method_decorator
 from django.views import generic
 
 from roborally.board.data.data_django import DjangoScenarioDataProvider
+from roborally.board.data.data_json import JSONScenarioDataProvider
 from roborally.models import Game, History, Bot
 from roborally.forms import GameForm
 from roborally.board.scenario import Scenario
 
 
 # Test canvas
-class CanvasView(generic.TemplateView):
+class TestScenarioView(generic.TemplateView):
+    template_name = 'roborally/test_scenario.html'
+
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        with open(path.join(path.split(__file__)[0],  "../../tests/roborally_tests/board/test_scenario.json"), 'r') as f:
+            scenario_data_provider = JSONScenarioDataProvider(f.read())
+        board_data = Scenario(scenario_data_provider, True).to_data()
+        context['board'] = board_data
+        return context
+
+
+class ScenarioCanvasPartialView(generic.TemplateView):
     template_name = 'roborally/canvas.html'
 
     def get_context_data(self, **kwargs):
