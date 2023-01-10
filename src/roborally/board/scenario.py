@@ -28,6 +28,8 @@ class Scenario(SerializationMixin):
             self._add_board(loader)
 
         self._determine_size()
+        # TODO: Fill the "middle" bits of the board with void elements
+        #  that are specific for its coordinates so they are available for the fill neighbours step.
         if load_flags:
             for flag in scenario_data_provider.flags:
                 self.add_movable(Flag(flag))
