@@ -357,10 +357,12 @@ class Roborally {
         const pusherThreePath = this._to_svg_list("M 0 0 H 12 V 1 H 3 V 2 H 5 V 1 H 7 V 2 H 9 V 1 H 11 V 2 H 12 V 3 H 0 V 2 H 1 V 1 H 0 Z");
         const pusherTwoPath = this._to_svg_list("M 0 0 H 12 V 1 H 4 V 2 H 8 V 1 H 10 V 2 H 12 V 3 H 0 V 2 H 2 V 1 H 0 Z");
         let pusherPath = undefined;
-        if( data.element_type === 'PUSHER_135' ) {
+        if( data.element_type === 'Pusher135' ) {
             pusherPath = pusherThreePath;
-        } else {
+        } else if ( data.element_type === 'Pusher24' ) {
             pusherPath = pusherTwoPath;
+        } else {
+            throw Error( "Unknown pusher type: " + data.element_type )
         }
         let path = undefined;
         let left = 0;
