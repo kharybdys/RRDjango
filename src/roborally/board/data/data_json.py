@@ -2,9 +2,8 @@ import json
 from dataclasses import asdict, dataclass, field
 from typing import Optional
 
-from roborally.board.data.loader import BoardLoader, BoardDataProvider, ScenarioDataProvider
+from roborally.board.data.loader import BoardLoader, BoardDataProvider, ScenarioDataProvider, ElementTypes
 from roborally.game.direction import Direction, to_optional_direction
-from roborally.models import ElementTypes
 
 
 @dataclass
@@ -47,7 +46,8 @@ class JSONBoardDataProvider(BoardDataProvider):
     @staticmethod
     def _to_board_element_data(element_dict: dict):
         direction = to_optional_direction(element_dict.get("direction", None))
-        return BoardElementData(**dict(element_dict, direction=direction))
+        element_type = ElementTypes(element_dict["element_type"])
+        return BoardElementData(**dict(element_dict, direction=direction, element_type=element_type))
 
 
 class JSONScenarioDataProvider(ScenarioDataProvider):

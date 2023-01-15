@@ -1,5 +1,5 @@
-from roborally.board.data.loader import BoardLoader, BoardDataProvider, ScenarioDataProvider
-from roborally.models import BoardElement, ElementTypes, ScenarioFlag, ScenarioBoard
+from roborally.board.data.loader import BoardLoader, BoardDataProvider, ScenarioDataProvider, ElementTypes
+from roborally.models.scenario import BoardElement, ScenarioFlag, ScenarioBoard
 
 
 class DjangoBoardDataProvider(BoardDataProvider):

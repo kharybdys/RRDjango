@@ -1,17 +1,15 @@
-from roborally.board.data.data_django import DjangoScenarioDataProvider
 from roborally.board.scenario import Scenario
 from roborally.game.bot import Bot
 from roborally.game.flag import Flag
 from roborally.game.movement import Movement
-from roborally.models import Game as GameModel
+from roborally.game.models import GameModel
 
 
 class Game:
-    def __init__(self, game_id: int):
-        self.model = GameModel.objects.get(pk=game_id)
+    def __init__(self, game: GameModel):
+        self.model = game
         self.phase = 1
-        scenario_data_provider = DjangoScenarioDataProvider(self.model.scenario_name)
-        self.scenario = Scenario(scenario_data_provider=scenario_data_provider, load_flags=False)
+        self.scenario = Scenario(scenario_data_provider=self.model.get_scenario_data_provider(), load_flags=False)
         self._load_flags()
         self._load_bots()
 
@@ -19,14 +17,14 @@ class Game:
         self.phase += 1
 
     def _load_flags(self):
-        flags = self.model.flag_set
+        flags = self.model.flags
         for flag in flags:
-            self.scenario.add_flag(Flag(flag))
+            self.scenario.add_movable(Flag(flag))
 
     def _load_bots(self):
-        bots = self.model.bot_set
+        bots = self.model.bots
         for bot in bots:
-            self.scenario.add_bot(Bot(bot))
+            self.scenario.add_movable(Bot(bot))
 
     def process_phase(self):
         self.process_robot_movements()

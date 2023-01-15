@@ -3,7 +3,7 @@ from roborally.game.card import CardDefinition
 from roborally.game.events import EventType
 from roborally.game.movable import Movable
 from roborally.game.direction import Direction
-from roborally.models import Flag as FlagModel
+from roborally.game.models import FlagModel
 
 
 class Flag(Movable):

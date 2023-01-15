@@ -2,6 +2,7 @@ from dataclasses import dataclass, field
 
 from roborally.game.card import CardDefinition
 from roborally.game.events import EventType
+from roborally.game.models import BotModel, FlagModel
 from roborally.game.movable import Movable
 from roborally.game.direction import Direction
 from roborally_tests.game.events import EventChecker
@@ -27,7 +28,7 @@ class CoordinatesWithDirection(Coordinates):
 
 
 @dataclass
-class MovableModelMock(CoordinatesWithDirection):
+class MovableModelMock(CoordinatesWithDirection, BotModel, FlagModel):
     event_checker: EventChecker
     type: str
     order_number: int = 0

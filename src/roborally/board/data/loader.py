@@ -1,5 +1,6 @@
 from abc import ABC, abstractmethod
 from collections import defaultdict
+from enum import Enum
 from typing import Iterable
 
 import roborally.game.direction
@@ -8,7 +9,33 @@ from roborally.board.element import conveyor, pusher, rotator, basic
 from roborally.board.element.basic import BasicElement
 from roborally.board.laser import Laser
 from roborally.game.direction import Direction
-from roborally.models import ElementTypes
+
+
+class ElementTypes(Enum):
+    BASIC = 'BASIC'
+    STARTING_1 = 'STARTING_1'
+    STARTING_2 = 'STARTING_2'
+    STARTING_3 = 'STARTING_3'
+    STARTING_4 = 'STARTING_4'
+    STARTING_5 = 'STARTING_5'
+    STARTING_6 = 'STARTING_6'
+    STARTING_7 = 'STARTING_7'
+    STARTING_8 = 'STARTING_8'
+    REPAIR = 'REPAIR'
+    OPTION = 'OPTION'
+    HOLE = 'HOLE'
+    SINGLE_CONVEYOR = 'SINGLE_CONVEYOR'
+    DUAL_CONVEYOR = 'DUAL_CONVEYOR'
+    PUSHER_135 = 'PUSHER_135'
+    PUSHER_24 = 'PUSHER_24'
+    ROTATOR_CLOCKWISE = 'ROTATOR_CLOCKWISE'
+    ROTATOR_COUNTER_CLOCKWISE = 'ROTATOR_COUNTER_CLOCKWISE'
+    WALL = 'WALL'
+    LASER = 'LASER'
+
+    @classmethod
+    def get_choices(cls):
+        return [(key.value, key.name) for key in cls]
 
 
 class BoardDataProvider(ABC):
